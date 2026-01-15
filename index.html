@@ -1,0 +1,1602 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>2M Motos - Sistema de Fichas Técnicas</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+    <style>
+        :root {
+            --primary: #1a237e;
+            --secondary: #ff3d00;
+            --accent: #ffab00;
+            --dark: #0d1538;
+            --light: #f5f5f7;
+            --success: #00c853;
+            --warning: #ff9100;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', 'Roboto', 'Arial', sans-serif;
+        }
+
+        body {
+            background: linear-gradient(135deg, var(--dark) 0%, var(--primary) 100%);
+            color: var(--light);
+            min-height: 100vh;
+            padding: 0;
+            position: relative;
+            overflow-x: hidden;
+        }
+
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                radial-gradient(circle at 20% 80%, rgba(255, 61, 0, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 80% 20%, rgba(255, 171, 0, 0.1) 0%, transparent 50%);
+            z-index: -1;
+        }
+
+        /* Container Principal */
+        .main-container {
+            display: flex;
+            min-height: 100vh;
+            max-width: 1600px;
+            margin: 0 auto;
+            box-shadow: 0 0 50px rgba(0, 0, 0, 0.5);
+            position: relative;
+        }
+
+        /* Sidebar */
+        .sidebar {
+            width: 280px;
+            background: rgba(13, 21, 56, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 30px 20px;
+            border-right: 2px solid var(--secondary);
+            position: relative;
+            overflow-y: auto;
+            z-index: 10;
+        }
+
+        .logo-container {
+            text-align: center;
+            margin-bottom: 40px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid rgba(255, 61, 0, 0.3);
+        }
+
+        .logo {
+            width: 180px;
+            height: auto;
+            filter: drop-shadow(0 0 10px rgba(255, 61, 0, 0.5));
+            margin-bottom: 15px;
+        }
+
+        .logo-text {
+            color: white;
+            font-size: 24px;
+            font-weight: 900;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            background: linear-gradient(90deg, var(--accent), var(--secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-shadow: 0 2px 10px rgba(255, 61, 0, 0.3);
+        }
+
+        .sidebar-title {
+            color: var(--accent);
+            font-size: 18px;
+            font-weight: 600;
+            margin: 30px 0 15px 0;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .sidebar-title i {
+            color: var(--secondary);
+        }
+
+        .menu-btn {
+            width: 100%;
+            padding: 15px 20px;
+            background: rgba(255, 61, 0, 0.1);
+            border: 1px solid rgba(255, 61, 0, 0.3);
+            color: white;
+            border-radius: 8px;
+            margin-bottom: 10px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            font-size: 16px;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            text-align: left;
+        }
+
+        .menu-btn:hover {
+            background: rgba(255, 61, 0, 0.2);
+            transform: translateX(5px);
+            border-color: var(--secondary);
+        }
+
+        .menu-btn.active {
+            background: linear-gradient(90deg, rgba(255, 61, 0, 0.3), rgba(255, 171, 0, 0.3));
+            border-color: var(--secondary);
+            box-shadow: 0 0 15px rgba(255, 61, 0, 0.3);
+        }
+
+        .menu-btn i {
+            font-size: 20px;
+            color: var(--accent);
+            width: 24px;
+        }
+
+        .pdf-counter {
+            background: var(--secondary);
+            color: white;
+            border-radius: 50%;
+            width: 24px;
+            height: 24px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 12px;
+            font-weight: bold;
+            margin-left: auto;
+        }
+
+        /* Conteúdo Principal */
+        .main-content {
+            flex: 1;
+            padding: 30px;
+            overflow-y: auto;
+            background: rgba(245, 245, 247, 0.05);
+        }
+
+        .content-section {
+            display: none;
+            animation: fadeIn 0.5s ease;
+        }
+
+        .content-section.active {
+            display: block;
+        }
+
+        /* Header do Conteúdo */
+        .content-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid rgba(255, 61, 0, 0.3);
+        }
+
+        .content-title {
+            font-size: 32px;
+            font-weight: 800;
+            background: linear-gradient(90deg, var(--accent), var(--secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-shadow: 0 2px 10px rgba(255, 61, 0, 0.3);
+        }
+
+        .content-subtitle {
+            color: rgba(255, 255, 255, 0.8);
+            font-size: 16px;
+            margin-top: 5px;
+        }
+
+        .date-info {
+            color: var(--accent);
+            font-weight: 600;
+            font-size: 14px;
+            text-align: right;
+        }
+
+        /* Cards */
+        .card {
+            background: rgba(13, 21, 56, 0.7);
+            border-radius: 15px;
+            border: 1px solid rgba(255, 61, 0, 0.2);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            overflow: hidden;
+            margin-bottom: 30px;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(255, 61, 0, 0.2);
+        }
+
+        .card-header {
+            background: linear-gradient(90deg, rgba(255, 61, 0, 0.2), rgba(255, 171, 0, 0.2));
+            padding: 20px 30px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            border-bottom: 1px solid rgba(255, 61, 0, 0.3);
+        }
+
+        .card-header i {
+            color: var(--accent);
+            font-size: 24px;
+        }
+
+        .card-title {
+            font-size: 22px;
+            font-weight: 700;
+            color: white;
+        }
+
+        .card-body {
+            padding: 30px;
+        }
+
+        /* Formulário */
+        .form-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 25px;
+        }
+
+        .form-group {
+            position: relative;
+        }
+
+        .form-label {
+            display: block;
+            margin-bottom: 10px;
+            color: var(--accent);
+            font-weight: 600;
+            font-size: 16px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .form-label i {
+            color: var(--secondary);
+            width: 20px;
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 15px 20px;
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 61, 0, 0.3);
+            border-radius: 8px;
+            font-size: 16px;
+            color: white;
+            transition: all 0.3s;
+        }
+
+        .form-control:focus {
+            outline: none;
+            border-color: var(--secondary);
+            box-shadow: 0 0 0 3px rgba(255, 61, 0, 0.2);
+            background: rgba(255, 255, 255, 0.15);
+        }
+
+        .form-control::placeholder {
+            color: rgba(255, 255, 255, 0.5);
+        }
+
+        /* Botões de Ação */
+        .actions-container {
+            display: flex;
+            gap: 20px;
+            margin-top: 40px;
+            flex-wrap: wrap;
+        }
+
+        .action-btn {
+            flex: 1;
+            min-width: 200px;
+            padding: 18px 30px;
+            border: none;
+            border-radius: 10px;
+            font-size: 18px;
+            font-weight: 700;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 15px;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .action-btn::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: 0.5s;
+        }
+
+        .action-btn:hover::after {
+            left: 100%;
+        }
+
+        .action-btn i {
+            font-size: 20px;
+        }
+
+        .btn-primary {
+            background: linear-gradient(90deg, var(--secondary), var(--accent));
+            color: white;
+            box-shadow: 0 5px 20px rgba(255, 61, 0, 0.4);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(255, 61, 0, 0.6);
+        }
+
+        .btn-success {
+            background: linear-gradient(90deg, var(--success), #00e676);
+            color: white;
+            box-shadow: 0 5px 20px rgba(0, 200, 83, 0.4);
+        }
+
+        .btn-success:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(0, 200, 83, 0.6);
+        }
+
+        /* Lista de PDFs */
+        .pdf-list-container {
+            background: rgba(13, 21, 56, 0.7);
+            border-radius: 15px;
+            border: 1px solid rgba(255, 61, 0, 0.2);
+            backdrop-filter: blur(10px);
+            padding: 30px;
+            margin-top: 30px;
+            max-height: 600px;
+            overflow-y: auto;
+        }
+
+        .pdf-list-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 25px;
+        }
+
+        .pdf-list-title {
+            font-size: 24px;
+            color: var(--accent);
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .clear-btn {
+            background: rgba(255, 61, 0, 0.2);
+            color: white;
+            border: 1px solid var(--secondary);
+            padding: 10px 20px;
+            border-radius: 6px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-weight: 600;
+            transition: all 0.3s;
+        }
+
+        .clear-btn:hover {
+            background: rgba(255, 61, 0, 0.4);
+        }
+
+        .pdf-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 20px;
+        }
+
+        .pdf-item {
+            background: rgba(26, 35, 126, 0.5);
+            border: 1px solid rgba(255, 61, 0, 0.3);
+            border-radius: 10px;
+            padding: 20px;
+            transition: all 0.3s;
+            position: relative;
+        }
+
+        .pdf-item:hover {
+            transform: translateY(-5px);
+            border-color: var(--secondary);
+            box-shadow: 0 10px 20px rgba(255, 61, 0, 0.2);
+        }
+
+        .pdf-item-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid rgba(255, 61, 0, 0.2);
+        }
+
+        .pdf-item-title {
+            font-weight: 700;
+            color: white;
+            font-size: 18px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .pdf-item-title i {
+            color: var(--accent);
+        }
+
+        .pdf-item-date {
+            color: var(--accent);
+            font-size: 12px;
+            font-weight: 600;
+        }
+
+        .pdf-item-details {
+            margin-bottom: 15px;
+        }
+
+        .pdf-detail {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 8px;
+            padding: 5px 0;
+            border-bottom: 1px dashed rgba(255, 255, 255, 0.1);
+        }
+
+        .detail-label {
+            color: rgba(255, 255, 255, 0.7);
+            font-size: 14px;
+        }
+
+        .detail-value {
+            color: white;
+            font-weight: 600;
+            font-size: 14px;
+        }
+
+        .pdf-item-actions {
+            display: flex;
+            gap: 10px;
+            margin-top: 15px;
+        }
+
+        .pdf-action-btn {
+            flex: 1;
+            padding: 10px;
+            border: none;
+            border-radius: 6px;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            transition: all 0.3s;
+        }
+
+        .pdf-view {
+            background: rgba(255, 61, 0, 0.2);
+            color: white;
+            border: 1px solid var(--secondary);
+        }
+
+        .pdf-view:hover {
+            background: rgba(255, 61, 0, 0.4);
+        }
+
+        .pdf-download {
+            background: rgba(0, 200, 83, 0.2);
+            color: white;
+            border: 1px solid var(--success);
+        }
+
+        .pdf-download:hover {
+            background: rgba(0, 200, 83, 0.4);
+        }
+
+        .pdf-delete {
+            background: rgba(244, 67, 54, 0.2);
+            color: white;
+            border: 1px solid #f44336;
+        }
+
+        .pdf-delete:hover {
+            background: rgba(244, 67, 54, 0.4);
+        }
+
+        .empty-list {
+            text-align: center;
+            padding: 50px 20px;
+            color: rgba(255, 255, 255, 0.5);
+        }
+
+        .empty-list i {
+            font-size: 50px;
+            margin-bottom: 20px;
+            color: rgba(255, 61, 0, 0.3);
+        }
+
+        /* Modal */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.9);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            backdrop-filter: blur(5px);
+        }
+
+        .modal-content {
+            background: linear-gradient(135deg, #0d1538 0%, #1a237e 100%);
+            border-radius: 15px;
+            max-width: 900px;
+            width: 100%;
+            max-height: 90vh;
+            overflow-y: auto;
+            position: relative;
+            border: 2px solid var(--secondary);
+            box-shadow: 0 0 50px rgba(255, 61, 0, 0.5);
+        }
+
+        .modal-header {
+            background: linear-gradient(90deg, var(--secondary), var(--accent));
+            padding: 20px 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-radius: 13px 13px 0 0;
+        }
+
+        .modal-title {
+            font-size: 24px;
+            font-weight: 700;
+            color: white;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .modal-close {
+            background: none;
+            border: none;
+            color: white;
+            font-size: 30px;
+            cursor: pointer;
+            transition: transform 0.3s;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+        }
+
+        .modal-close:hover {
+            transform: rotate(90deg);
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        .modal-body {
+            padding: 30px;
+        }
+
+        /* PDF Preview - NOVA LOGO */
+        .pdf-preview-container {
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+        }
+
+        .pdf-header {
+            background: linear-gradient(90deg, var(--primary), var(--dark));
+            padding: 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 3px solid var(--secondary);
+        }
+
+        .pdf-logo {
+            width: 220px; /* Ajustado para a nova logo */
+            height: auto;
+            max-height: 120px;
+            object-fit: contain;
+        }
+
+        .pdf-main-title {
+            color: white;
+            font-size: 36px;
+            font-weight: 900;
+            text-align: right;
+            text-transform: uppercase;
+        }
+
+        .pdf-subtitle {
+            color: var(--accent);
+            font-size: 18px;
+            font-weight: 600;
+            margin-top: 5px;
+            display: block;
+        }
+
+        .pdf-section {
+            padding: 30px;
+        }
+
+        .pdf-section-title {
+            color: var(--primary);
+            font-size: 24px;
+            font-weight: 700;
+            margin-bottom: 25px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid var(--secondary);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .pdf-data-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 25px;
+            margin-bottom: 40px;
+        }
+
+        .pdf-data-item {
+            margin-bottom: 20px;
+        }
+
+        .pdf-data-label {
+            color: var(--primary);
+            font-weight: 700;
+            font-size: 16px;
+            margin-bottom: 5px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .pdf-data-value {
+            font-size: 20px;
+            padding: 10px 0;
+            border-bottom: 2px dashed #e0e0e0;
+            color: #333;
+            font-weight: 600;
+        }
+
+        .pdf-value-highlight {
+            color: var(--success);
+            font-size: 22px;
+            font-weight: 800;
+        }
+
+        .pdf-footer {
+            background: #f5f5f5;
+            padding: 30px;
+            text-align: center;
+            border-top: 3px solid var(--secondary);
+            margin-top: 50px;
+        }
+
+        .pdf-footer-text {
+            color: var(--primary);
+            font-size: 20px;
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+
+        .pdf-footer-subtext {
+            color: #666;
+            font-size: 16px;
+            font-style: italic;
+        }
+
+        /* Responsividade */
+        @media (max-width: 1200px) {
+            .main-container {
+                flex-direction: column;
+            }
+            
+            .sidebar {
+                width: 100%;
+                border-right: none;
+                border-bottom: 2px solid var(--secondary);
+                padding: 20px;
+            }
+            
+            .logo-container {
+                margin-bottom: 20px;
+            }
+            
+            .menu-buttons {
+                display: flex;
+                flex-wrap: wrap;
+                gap: 10px;
+            }
+            
+            .menu-btn {
+                flex: 1;
+                min-width: 200px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .form-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .actions-container {
+                flex-direction: column;
+            }
+            
+            .action-btn {
+                min-width: 100%;
+            }
+            
+            .pdf-list {
+                grid-template-columns: 1fr;
+            }
+            
+            .content-header {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 15px;
+            }
+            
+            .date-info {
+                text-align: left;
+            }
+            
+            .pdf-header {
+                flex-direction: column;
+                text-align: center;
+                gap: 20px;
+            }
+            
+            .pdf-logo {
+                width: 180px;
+            }
+            
+            .pdf-main-title {
+                text-align: center;
+            }
+        }
+
+        /* Animações */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes slideIn {
+            from { transform: translateX(-20px); opacity: 0; }
+            to { transform: translateX(0); opacity: 1; }
+        }
+
+        .fade-in {
+            animation: fadeIn 0.5s ease;
+        }
+
+        .slide-in {
+            animation: slideIn 0.3s ease;
+        }
+
+        /* Barra de rolagem personalizada */
+        ::-webkit-scrollbar {
+            width: 10px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: rgba(13, 21, 56, 0.5);
+            border-radius: 5px;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: linear-gradient(var(--secondary), var(--accent));
+            border-radius: 5px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: linear-gradient(var(--accent), var(--secondary));
+        }
+
+        /* Utilitários */
+        .text-highlight {
+            color: var(--accent);
+            font-weight: 700;
+        }
+
+        .badge {
+            background: var(--secondary);
+            color: white;
+            padding: 3px 8px;
+            border-radius: 4px;
+            font-size: 12px;
+            font-weight: 700;
+            margin-left: 10px;
+        }
+
+        .loading {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            z-index: 2000;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .loading-spinner {
+            width: 60px;
+            height: 60px;
+            border: 5px solid rgba(255, 61, 0, 0.3);
+            border-top-color: var(--secondary);
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+
+        .loading-text {
+            color: white;
+            font-size: 18px;
+            font-weight: 600;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+    </style>
+</head>
+<body>
+    <!-- Loading Overlay -->
+    <div class="loading" id="loading">
+        <div class="loading-spinner"></div>
+        <div class="loading-text">Gerando PDF...</div>
+    </div>
+
+    <div class="main-container">
+        <!-- Sidebar -->
+        <div class="sidebar">
+            <div class="logo-container">
+                <img src="https://i.ibb.co/jPy9b9fZ/logo2.png" alt="Logo 2M Motos" class="logo">
+                <div class="logo-text">2M MOTOS</div>
+            </div>
+
+            <div class="sidebar-title">
+                <i class="fas fa-bars"></i> Menu Principal
+            </div>
+            
+            <div class="menu-buttons">
+                <button class="menu-btn active" data-section="form-section">
+                    <i class="fas fa-plus-circle"></i>
+                    Nova Ficha
+                    <span class="badge">NOVO</span>
+                </button>
+                
+                <button class="menu-btn" data-section="list-section">
+                    <i class="fas fa-file-pdf"></i>
+                    Fichas Salvas
+                    <span class="pdf-counter" id="pdfCount">0</span>
+                </button>
+                
+                <button class="menu-btn" id="quickPreviewBtn">
+                    <i class="fas fa-eye"></i>
+                    Pré-visualizar
+                </button>
+                
+                <button class="menu-btn" id="quickDownloadBtn">
+                    <i class="fas fa-download"></i>
+                    Download Rápido
+                </button>
+            </div>
+
+            <div class="sidebar-title" style="margin-top: 40px;">
+                <i class="fas fa-chart-bar"></i> Estatísticas
+            </div>
+            
+            <div class="stats">
+                <div style="margin-bottom: 15px; padding: 15px; background: rgba(255, 61, 0, 0.1); border-radius: 8px;">
+                    <div style="color: var(--accent); font-size: 14px; margin-bottom: 5px;">Total de Fichas</div>
+                    <div style="font-size: 24px; font-weight: 700; color: white;" id="totalFichas">0</div>
+                </div>
+                
+                <div style="padding: 15px; background: rgba(255, 171, 0, 0.1); border-radius: 8px;">
+                    <div style="color: var(--accent); font-size: 14px; margin-bottom: 5px;">Última Ficha</div>
+                    <div style="font-size: 16px; font-weight: 600; color: white;" id="ultimaFicha">Nenhuma</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Conteúdo Principal -->
+        <div class="main-content">
+            <!-- Seção do Formulário -->
+            <div class="content-section active" id="form-section">
+                <div class="content-header">
+                    <div>
+                        <div class="content-title">NOVA FICHA TÉCNICA</div>
+                        <div class="content-subtitle">Preencha os dados da motocicleta para gerar a ficha técnica</div>
+                    </div>
+                    <div class="date-info">
+                        <i class="fas fa-calendar-alt"></i> <span id="currentDate">--/--/----</span>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="card-header">
+                        <i class="fas fa-motorcycle"></i>
+                        <div class="card-title">DADOS DA MOTOCICLETA</div>
+                    </div>
+                    
+                    <div class="card-body">
+                        <div class="form-grid">
+                            <div class="form-group">
+                                <label class="form-label">
+                                    <i class="fas fa-tag"></i> Placa
+                                </label>
+                                <input type="text" class="form-control" id="placa" placeholder="ABC-1D23" maxlength="8">
+                            </div>
+                            
+                            <div class="form-group">
+                                <label class="form-label">
+                                    <i class="fas fa-brands fa-mdb"></i> Marca
+                                </label>
+                                <input type="text" class="form-control" id="marca" placeholder="Honda, Yamaha, etc.">
+                            </div>
+                            
+                            <div class="form-group">
+                                <label class="form-label">
+                                    <i class="fas fa-cube"></i> Modelo
+                                </label>
+                                <input type="text" class="form-control" id="modelo" placeholder="CB 500X, MT-07, etc.">
+                            </div>
+                            
+                            <div class="form-group">
+                                <label class="form-label">
+                                    <i class="fas fa-calendar-alt"></i> Ano
+                                </label>
+                                <input type="number" class="form-control" id="ano" placeholder="2023" min="1900" max="2099">
+                            </div>
+                            
+                            <div class="form-group">
+                                <label class="form-label">
+                                    <i class="fas fa-palette"></i> Cor
+                                </label>
+                                <input type="text" class="form-control" id="cor" placeholder="Vermelha, Preta, etc.">
+                            </div>
+                            
+                            <div class="form-group">
+                                <label class="form-label">
+                                    <i class="fas fa-dollar-sign"></i> Valor de Venda
+                                </label>
+                                <input type="text" class="form-control" id="valor" placeholder="R$ 35.900,00">
+                            </div>
+                        </div>
+                        
+                        <div class="actions-container">
+                            <button type="button" class="action-btn btn-primary" id="generatePreviewBtn">
+                                <i class="fas fa-eye"></i> Visualizar PDF
+                            </button>
+                            <button type="button" class="action-btn btn-success" id="generateDownloadBtn">
+                                <i class="fas fa-download"></i> Gerar & Salvar PDF
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Seção da Lista -->
+            <div class="content-section" id="list-section">
+                <div class="content-header">
+                    <div>
+                        <div class="content-title">FICHAS TÉCNICAS SALVAS</div>
+                        <div class="content-subtitle">Gerencie todas as fichas técnicas criadas</div>
+                    </div>
+                    <div class="date-info">
+                        <i class="fas fa-history"></i> <span id="lastUpdate">--:--</span>
+                    </div>
+                </div>
+
+                <div class="pdf-list-container">
+                    <div class="pdf-list-header">
+                        <div class="pdf-list-title">
+                            <i class="fas fa-list"></i> Lista de Fichas
+                        </div>
+                        <button class="clear-btn" id="clearAllBtn">
+                            <i class="fas fa-trash"></i> Limpar Tudo
+                        </button>
+                    </div>
+                    
+                    <div class="pdf-list" id="pdfList">
+                        <!-- Lista de PDFs será gerada aqui -->
+                    </div>
+                    
+                    <div class="empty-list" id="emptyListMessage">
+                        <i class="far fa-file-pdf"></i>
+                        <h3>Nenhuma ficha técnica salva</h3>
+                        <p>Gere sua primeira ficha técnica para visualizá-la aqui</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal de Pré-visualização -->
+    <div class="modal" id="previewModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <div class="modal-title">
+                    <i class="fas fa-file-pdf"></i> Pré-visualização da Ficha Técnica
+                </div>
+                <button class="modal-close" id="closePreviewModal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div id="pdfPreviewContent" class="pdf-preview-container">
+                    <!-- Conteúdo do PDF será gerado aqui -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Sistema de Gerenciamento de Fichas Técnicas - 2M MOTOS
+        class FichaTecnicaSystem {
+            constructor() {
+                this.savedFichas = JSON.parse(localStorage.getItem('2m_motos_fichas')) || [];
+                this.init();
+            }
+            
+            init() {
+                this.setupEventListeners();
+                this.updateDate();
+                this.updateStats();
+                this.renderFichasList();
+                this.setupFormValidation();
+                this.updateLastUpdateTime();
+                
+                // Atualizar hora a cada minuto
+                setInterval(() => this.updateLastUpdateTime(), 60000);
+            }
+            
+            setupEventListeners() {
+                // Navegação do menu
+                document.querySelectorAll('.menu-btn').forEach(btn => {
+                    btn.addEventListener('click', (e) => {
+                        document.querySelectorAll('.menu-btn').forEach(b => b.classList.remove('active'));
+                        document.querySelectorAll('.content-section').forEach(s => s.classList.remove('active'));
+                        
+                        e.currentTarget.classList.add('active');
+                        const sectionId = e.currentTarget.dataset.section;
+                        if (sectionId) {
+                            document.getElementById(sectionId).classList.add('active');
+                        }
+                    });
+                });
+                
+                // Botões de ação
+                document.getElementById('generatePreviewBtn').addEventListener('click', () => this.previewPDF());
+                document.getElementById('generateDownloadBtn').addEventListener('click', () => this.generateAndSavePDF());
+                document.getElementById('quickPreviewBtn').addEventListener('click', () => this.previewPDF());
+                document.getElementById('quickDownloadBtn').addEventListener('click', () => this.generateAndSavePDF());
+                document.getElementById('clearAllBtn').addEventListener('click', () => this.clearAllFichas());
+                
+                // Modal
+                document.getElementById('closePreviewModal').addEventListener('click', () => {
+                    document.getElementById('previewModal').style.display = 'none';
+                });
+                
+                document.getElementById('previewModal').addEventListener('click', (e) => {
+                    if (e.target === document.getElementById('previewModal')) {
+                        document.getElementById('previewModal').style.display = 'none';
+                    }
+                });
+                
+                // Formatação de campos
+                document.getElementById('placa').addEventListener('input', this.formatPlaca);
+                document.getElementById('valor').addEventListener('input', this.formatCurrency);
+            }
+            
+            formatPlaca(e) {
+                let value = e.target.value.toUpperCase().replace(/[^A-Z0-9]/g, '');
+                if (value.length > 3) {
+                    value = value.substring(0, 3) + '-' + value.substring(3, 7);
+                }
+                e.target.value = value;
+            }
+            
+            formatCurrency(e) {
+                let value = e.target.value.replace(/\D/g, '');
+                
+                if (value.length === 0) {
+                    e.target.value = '';
+                    return;
+                }
+                
+                // Converte para número e formata
+                const number = parseInt(value) / 100;
+                e.target.value = number.toLocaleString('pt-BR', {
+                    style: 'currency',
+                    currency: 'BRL'
+                });
+            }
+            
+            updateDate() {
+                const now = new Date();
+                const options = { 
+                    day: '2-digit', 
+                    month: '2-digit', 
+                    year: 'numeric',
+                    weekday: 'long'
+                };
+                document.getElementById('currentDate').textContent = 
+                    now.toLocaleDateString('pt-BR', options);
+            }
+            
+            updateLastUpdateTime() {
+                const now = new Date();
+                document.getElementById('lastUpdate').textContent = 
+                    `Atualizado às ${now.toLocaleTimeString('pt-BR', {hour: '2-digit', minute:'2-digit'})}`;
+            }
+            
+            getFormData() {
+                return {
+                    placa: document.getElementById('placa').value.trim(),
+                    marca: document.getElementById('marca').value.trim(),
+                    modelo: document.getElementById('modelo').value.trim(),
+                    ano: document.getElementById('ano').value.trim(),
+                    cor: document.getElementById('cor').value.trim(),
+                    valor: document.getElementById('valor').value.trim(),
+                    dataCriacao: new Date().toISOString(),
+                    id: Date.now().toString() + Math.random().toString(36).substr(2, 9)
+                };
+            }
+            
+            validateFormData(data) {
+                const errors = [];
+                
+                if (!data.placa) errors.push('Placa é obrigatória');
+                else if (!/^[A-Z]{3}-[0-9][A-Z0-9][0-9]{2}$/.test(data.placa)) 
+                    errors.push('Formato de placa inválido (ex: ABC-1D23)');
+                
+                if (!data.marca) errors.push('Marca é obrigatória');
+                if (!data.modelo) errors.push('Modelo é obrigatório');
+                if (!data.ano) errors.push('Ano é obrigatório');
+                else if (parseInt(data.ano) < 1900 || parseInt(data.ano) > new Date().getFullYear() + 1)
+                    errors.push('Ano inválido');
+                
+                if (!data.cor) errors.push('Cor é obrigatória');
+                if (!data.valor) errors.push('Valor é obrigatório');
+                
+                return errors;
+            }
+            
+            setupFormValidation() {
+                const formInputs = document.querySelectorAll('.form-control');
+                formInputs.forEach(input => {
+                    input.addEventListener('blur', () => {
+                        const data = this.getFormData();
+                        const errors = this.validateFormData(data);
+                        const fieldName = input.id;
+                        
+                        if (errors.some(err => err.toLowerCase().includes(fieldName))) {
+                            input.style.borderColor = '#f44336';
+                        } else {
+                            input.style.borderColor = 'rgba(255, 61, 0, 0.3)';
+                        }
+                    });
+                });
+            }
+            
+            generatePDFContent(data) {
+                const dataCriacao = new Date(data.dataCriacao);
+                const dataFormatada = dataCriacao.toLocaleDateString('pt-BR', {
+                    day: '2-digit',
+                    month: '2-digit',
+                    year: 'numeric',
+                    hour: '2-digit',
+                    minute: '2-digit'
+                });
+                
+                // NOVA LOGO: https://i.ibb.co/DD98rjsH/logo1.png
+                return `
+                    <div class="pdf-header">
+                        <img src="https://i.ibb.co/DD98rjsH/logo1.png" alt="Logo 2M Motos" class="pdf-logo">
+                        <div class="pdf-main-title">
+                            FICHA TÉCNICA
+                            <span class="pdf-subtitle">Gerado em ${dataFormatada}</span>
+                        </div>
+                    </div>
+                    
+                    <div class="pdf-section">
+                        <div class="pdf-section-title">
+                            <i class="fas fa-motorcycle"></i> DADOS DA MOTOCICLETA
+                        </div>
+                        
+                        <div class="pdf-data-grid">
+                            <div class="pdf-data-item">
+                                <div class="pdf-data-label">Placa</div>
+                                <div class="pdf-data-value">${data.placa || '[NÃO INFORMADO]'}</div>
+                            </div>
+                            
+                            <div class="pdf-data-item">
+                                <div class="pdf-data-label">Marca</div>
+                                <div class="pdf-data-value">${data.marca || '[NÃO INFORMADO]'}</div>
+                            </div>
+                            
+                            <div class="pdf-data-item">
+                                <div class="pdf-data-label">Modelo</div>
+                                <div class="pdf-data-value">${data.modelo || '[NÃO INFORMADO]'}</div>
+                            </div>
+                            
+                            <div class="pdf-data-item">
+                                <div class="pdf-data-label">Ano</div>
+                                <div class="pdf-data-value">${data.ano || '[NÃO INFORMADO]'}</div>
+                            </div>
+                            
+                            <div class="pdf-data-item">
+                                <div class="pdf-data-label">Cor</div>
+                                <div class="pdf-data-value">${data.cor || '[NÃO INFORMADO]'}</div>
+                            </div>
+                            
+                            <div class="pdf-data-item">
+                                <div class="pdf-data-label">Valor de Venda</div>
+                                <div class="pdf-data-value pdf-value-highlight">
+                                    ${data.valor || '[NÃO INFORMADO]'}
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="pdf-footer">
+                            <div class="pdf-footer-text">Procure o Vendedor para mais informações e detalhes</div>
+                            <div class="pdf-footer-subtext">2M MOTOS - Performance e Qualidade em Duas Rodas</div>
+                        </div>
+                    </div>
+                `;
+            }
+            
+            showLoading() {
+                document.getElementById('loading').style.display = 'flex';
+            }
+            
+            hideLoading() {
+                document.getElementById('loading').style.display = 'none';
+            }
+            
+            previewPDF() {
+                const data = this.getFormData();
+                const errors = this.validateFormData(data);
+                
+                if (errors.length > 0) {
+                    alert('Por favor, corrija os seguintes erros:\n\n' + errors.join('\n'));
+                    return;
+                }
+                
+                const previewContent = this.generatePDFContent(data);
+                document.getElementById('pdfPreviewContent').innerHTML = previewContent;
+                document.getElementById('previewModal').style.display = 'flex';
+            }
+            
+            generateAndSavePDF() {
+                const data = this.getFormData();
+                const errors = this.validateFormData(data);
+                
+                if (errors.length > 0) {
+                    alert('Por favor, corrija os seguintes erros:\n\n' + errors.join('\n'));
+                    return;
+                }
+                
+                this.showLoading();
+                
+                // Salvar nos dados locais
+                this.savedFichas.unshift(data);
+                localStorage.setItem('2m_motos_fichas', JSON.stringify(this.savedFichas));
+                
+                // Gerar PDF
+                const element = document.createElement('div');
+                element.innerHTML = this.generatePDFContent(data);
+                element.style.width = '210mm';
+                element.style.padding = '20mm';
+                
+                const options = {
+                    margin: 10,
+                    filename: `ficha-tecnica-${data.placa.replace(/\W/g, '')}-${Date.now()}.pdf`,
+                    image: { type: 'jpeg', quality: 0.98 },
+                    html2canvas: { 
+                        scale: 2,
+                        useCORS: true,
+                        logging: false
+                    },
+                    jsPDF: { 
+                        unit: 'mm', 
+                        format: 'a4', 
+                        orientation: 'portrait' 
+                    }
+                };
+                
+                setTimeout(() => {
+                    html2pdf().set(options).from(element).save().then(() => {
+                        this.hideLoading();
+                        this.showSuccessMessage('Ficha técnica gerada e salva com sucesso!');
+                        this.updateStats();
+                        this.renderFichasList();
+                        this.clearForm();
+                    });
+                }, 1000);
+            }
+            
+            showSuccessMessage(message) {
+                const btn = document.getElementById('generateDownloadBtn');
+                const originalText = btn.innerHTML;
+                
+                btn.innerHTML = `<i class="fas fa-check"></i> ${message}`;
+                btn.style.background = 'linear-gradient(90deg, #00c853, #00e676)';
+                
+                setTimeout(() => {
+                    btn.innerHTML = originalText;
+                    btn.style.background = 'linear-gradient(90deg, var(--success), #00e676)';
+                }, 3000);
+            }
+            
+            clearForm() {
+                document.getElementById('placa').value = '';
+                document.getElementById('marca').value = '';
+                document.getElementById('modelo').value = '';
+                document.getElementById('ano').value = '';
+                document.getElementById('cor').value = '';
+                document.getElementById('valor').value = '';
+            }
+            
+            renderFichasList() {
+                const pdfList = document.getElementById('pdfList');
+                const emptyListMessage = document.getElementById('emptyListMessage');
+                
+                if (this.savedFichas.length === 0) {
+                    pdfList.innerHTML = '';
+                    emptyListMessage.style.display = 'block';
+                    document.getElementById('pdfCount').textContent = '0';
+                    return;
+                }
+                
+                emptyListMessage.style.display = 'none';
+                document.getElementById('pdfCount').textContent = this.savedFichas.length;
+                
+                let html = '';
+                this.savedFichas.forEach((ficha, index) => {
+                    const dataCriacao = new Date(ficha.dataCriacao);
+                    const dataFormatada = dataCriacao.toLocaleDateString('pt-BR');
+                    
+                    html += `
+                        <div class="pdf-item slide-in">
+                            <div class="pdf-item-header">
+                                <div class="pdf-item-title">
+                                    <i class="fas fa-motorcycle"></i> ${ficha.modelo}
+                                </div>
+                                <div class="pdf-item-date">${dataFormatada}</div>
+                            </div>
+                            
+                            <div class="pdf-item-details">
+                                <div class="pdf-detail">
+                                    <span class="detail-label">Placa:</span>
+                                    <span class="detail-value">${ficha.placa}</span>
+                                </div>
+                                <div class="pdf-detail">
+                                    <span class="detail-label">Marca:</span>
+                                    <span class="detail-value">${ficha.marca}</span>
+                                </div>
+                                <div class="pdf-detail">
+                                    <span class="detail-label">Ano:</span>
+                                    <span class="detail-value">${ficha.ano}</span>
+                                </div>
+                                <div class="pdf-detail">
+                                    <span class="detail-label">Valor:</span>
+                                    <span class="detail-value text-highlight">${ficha.valor}</span>
+                                </div>
+                            </div>
+                            
+                            <div class="pdf-item-actions">
+                                <button class="pdf-action-btn pdf-view" onclick="sistema.viewFicha('${ficha.id}')">
+                                    <i class="fas fa-eye"></i> Ver
+                                </button>
+                                <button class="pdf-action-btn pdf-download" onclick="sistema.downloadFicha('${ficha.id}')">
+                                    <i class="fas fa-download"></i> Baixar
+                                </button>
+                                <button class="pdf-action-btn pdf-delete" onclick="sistema.deleteFicha('${ficha.id}')">
+                                    <i class="fas fa-trash"></i> Excluir
+                                </button>
+                            </div>
+                        </div>
+                    `;
+                });
+                
+                pdfList.innerHTML = html;
+            }
+            
+            viewFicha(id) {
+                const ficha = this.savedFichas.find(f => f.id === id);
+                if (ficha) {
+                    const previewContent = this.generatePDFContent(ficha);
+                    document.getElementById('pdfPreviewContent').innerHTML = previewContent;
+                    document.getElementById('previewModal').style.display = 'flex';
+                    
+                    // Ir para seção do formulário
+                    document.querySelectorAll('.menu-btn').forEach(b => b.classList.remove('active'));
+                    document.querySelectorAll('.content-section').forEach(s => s.classList.remove('active'));
+                    document.querySelector('.menu-btn[data-section="form-section"]').classList.add('active');
+                    document.getElementById('form-section').classList.add('active');
+                }
+            }
+            
+            downloadFicha(id) {
+                this.showLoading();
+                const ficha = this.savedFichas.find(f => f.id === id);
+                
+                if (ficha) {
+                    const element = document.createElement('div');
+                    element.innerHTML = this.generatePDFContent(ficha);
+                    element.style.width = '210mm';
+                    element.style.padding = '20mm';
+                    
+                    const options = {
+                        margin: 10,
+                        filename: `ficha-tecnica-${ficha.placa.replace(/\W/g, '')}.pdf`,
+                        image: { type: 'jpeg', quality: 0.98 },
+                        html2canvas: { 
+                            scale: 2,
+                            useCORS: true,
+                            logging: false
+                        },
+                        jsPDF: { 
+                            unit: 'mm', 
+                            format: 'a4', 
+                            orientation: 'portrait' 
+                        }
+                    };
+                    
+                    setTimeout(() => {
+                        html2pdf().set(options).from(element).save().then(() => {
+                            this.hideLoading();
+                        });
+                    }, 1000);
+                }
+            }
+            
+            deleteFicha(id) {
+                if (confirm('Tem certeza que deseja excluir esta ficha técnica?')) {
+                    this.savedFichas = this.savedFichas.filter(f => f.id !== id);
+                    localStorage.setItem('2m_motos_fichas', JSON.stringify(this.savedFichas));
+                    this.renderFichasList();
+                    this.updateStats();
+                }
+            }
+            
+            clearAllFichas() {
+                if (this.savedFichas.length === 0) {
+                    alert('Não há fichas para limpar!');
+                    return;
+                }
+                
+                if (confirm('Tem certeza que deseja excluir TODAS as fichas técnicas?\nEsta ação não pode ser desfeita.')) {
+                    this.savedFichas = [];
+                    localStorage.removeItem('2m_motos_fichas');
+                    this.renderFichasList();
+                    this.updateStats();
+                    alert('Todas as fichas técnicas foram excluídas!');
+                }
+            }
+            
+            updateStats() {
+                document.getElementById('totalFichas').textContent = this.savedFichas.length;
+                
+                if (this.savedFichas.length > 0) {
+                    const ultima = this.savedFichas[0];
+                    const data = new Date(ultima.dataCriacao);
+                    document.getElementById('ultimaFicha').textContent = 
+                        `${ultima.placa} - ${ultima.modelo} (${data.toLocaleDateString('pt-BR')})`;
+                } else {
+                    document.getElementById('ultimaFicha').textContent = 'Nenhuma';
+                }
+            }
+        }
+
+        // Inicializar o sistema
+        const sistema = new FichaTecnicaSystem();
+
+        // Adicionar dados de exemplo para demonstração
+        window.addEventListener('load', () => {
+            // Verificar se já existe dados salvos
+            if (sistema.savedFichas.length === 0) {
+                // Adicionar alguns dados de exemplo
+                const exemplos = [
+                    {
+                        placa: 'ABC-1D23',
+                        marca: 'Honda',
+                        modelo: 'CB 500X',
+                        ano: '2023',
+                        cor: 'Vermelha',
+                        valor: 'R$ 35.900,00',
+                        dataCriacao: new Date(Date.now() - 86400000).toISOString(), // 1 dia atrás
+                        id: 'exemplo1'
+                    },
+                    {
+                        placa: 'XYZ-9A87',
+                        marca: 'Yamaha',
+                        modelo: 'MT-07',
+                        ano: '2022',
+                        cor: 'Azul',
+                        valor: 'R$ 42.500,00',
+                        dataCriacao: new Date(Date.now() - 172800000).toISOString(), // 2 dias atrás
+                        id: 'exemplo2'
+                    },
+                    {
+                        placa: 'DEF-5G67',
+                        marca: 'BMW',
+                        modelo: 'R 1250 GS',
+                        ano: '2023',
+                        cor: 'Preta',
+                        valor: 'R$ 89.900,00',
+                        dataCriacao: new Date(Date.now() - 259200000).toISOString(), // 3 dias atrás
+                        id: 'exemplo3'
+                    }
+                ];
+                
+                sistema.savedFichas = exemplos;
+                localStorage.setItem('2m_motos_fichas', JSON.stringify(exemplos));
+                sistema.renderFichasList();
+                sistema.updateStats();
+            }
+            
+            // Preencher formulário com exemplo
+            document.getElementById('placa').value = 'MOT-0R23';
+            document.getElementById('marca').value = 'Ducati';
+            document.getElementById('modelo').value = 'Panigale V4';
+            document.getElementById('ano').value = '2023';
+            document.getElementById('cor').value = 'Vermelha';
+            document.getElementById('valor').value = 'R$ 129.900,00';
+        });
+    </script>
+</body>
+</html>
