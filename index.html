@@ -290,6 +290,11 @@
             transition: all 0.3s;
         }
 
+        textarea.form-control {
+            min-height: 100px;
+            resize: vertical;
+        }
+
         .form-control:focus {
             outline: none;
             border-color: var(--secondary);
@@ -299,6 +304,106 @@
 
         .form-control::placeholder {
             color: rgba(255, 255, 255, 0.5);
+        }
+
+        /* Botão IA */
+        .ai-btn-container {
+            position: relative;
+        }
+
+        .ai-btn {
+            position: absolute;
+            right: 10px;
+            top: 40px;
+            background: linear-gradient(90deg, var(--secondary), var(--accent));
+            color: white;
+            border: none;
+            border-radius: 6px;
+            padding: 8px 15px;
+            font-size: 12px;
+            font-weight: 600;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            transition: all 0.3s;
+            z-index: 2;
+        }
+
+        .ai-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(255, 61, 0, 0.4);
+        }
+
+        .ai-btn:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .ai-status {
+            position: absolute;
+            right: 10px;
+            top: 85px;
+            background: rgba(255, 61, 0, 0.2);
+            color: var(--accent);
+            border-radius: 15px;
+            padding: 4px 12px;
+            font-size: 11px;
+            font-weight: 600;
+            display: none;
+        }
+
+        /* Status */
+        .status-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-top: 10px;
+        }
+
+        .status-option {
+            flex: 1;
+            min-width: 120px;
+            padding: 12px 20px;
+            border: 2px solid rgba(255, 61, 0, 0.3);
+            border-radius: 8px;
+            background: rgba(255, 255, 255, 0.05);
+            color: white;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-align: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+
+        .status-option:hover {
+            background: rgba(255, 61, 0, 0.1);
+            border-color: var(--secondary);
+        }
+
+        .status-option.active {
+            background: rgba(255, 61, 0, 0.2);
+            border-color: var(--secondary);
+            box-shadow: 0 0 10px rgba(255, 61, 0, 0.3);
+        }
+
+        .status-disponivel.active {
+            background: rgba(0, 200, 83, 0.2);
+            border-color: var(--success);
+        }
+
+        .status-vendido.active {
+            background: rgba(244, 67, 54, 0.2);
+            border-color: #f44336;
+        }
+
+        .status-reservado.active {
+            background: rgba(255, 145, 0, 0.2);
+            border-color: var(--warning);
         }
 
         /* Botões de Ação */
@@ -621,7 +726,7 @@
             padding: 30px;
         }
 
-        /* PDF Preview - NOVA LOGO */
+        /* PDF Preview - ESPAÇAMENTO AJUSTADO PARA A4 */
         .pdf-preview-container {
             background: white;
             border-radius: 10px;
@@ -631,105 +736,165 @@
 
         .pdf-header {
             background: linear-gradient(90deg, var(--primary), var(--dark));
-            padding: 30px;
+            padding: 15px 25px;
             display: flex;
             justify-content: space-between;
             align-items: center;
             border-bottom: 3px solid var(--secondary);
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2);
+            min-height: 70px;
         }
 
         .pdf-logo {
-            width: 220px; /* Ajustado para a nova logo */
+            width: 130px;
             height: auto;
-            max-height: 120px;
+            max-height: 55px;
             object-fit: contain;
+            filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.3));
         }
 
         .pdf-main-title {
             color: white;
-            font-size: 36px;
+            font-size: 26px;
             font-weight: 900;
             text-align: right;
             text-transform: uppercase;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+            letter-spacing: 1px;
+            line-height: 1.2;
         }
 
         .pdf-subtitle {
             color: var(--accent);
-            font-size: 18px;
-            font-weight: 600;
-            margin-top: 5px;
+            font-size: 14px;
+            font-weight: 700;
+            margin-top: 3px;
             display: block;
+            text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
         }
 
         .pdf-section {
-            padding: 30px;
+            padding: 20px 25px;
         }
 
         .pdf-section-title {
             color: var(--primary);
-            font-size: 24px;
-            font-weight: 700;
-            margin-bottom: 25px;
+            font-size: 20px;
+            font-weight: 800;
+            margin-bottom: 20px;
             padding-bottom: 10px;
-            border-bottom: 2px solid var(--secondary);
+            border-bottom: 3px solid var(--secondary);
             display: flex;
             align-items: center;
             gap: 10px;
-        }
-
-        .pdf-data-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 25px;
-            margin-bottom: 40px;
-        }
-
-        .pdf-data-item {
-            margin-bottom: 20px;
-        }
-
-        .pdf-data-label {
-            color: var(--primary);
-            font-weight: 700;
-            font-size: 16px;
-            margin-bottom: 5px;
             text-transform: uppercase;
             letter-spacing: 0.5px;
         }
 
+        .pdf-data-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin-bottom: 25px;
+        }
+
+        .pdf-data-item {
+            margin-bottom: 15px;
+            padding: 6px;
+            background: #f9f9f9;
+            border-radius: 5px;
+            border-left: 4px solid var(--accent);
+        }
+
+        .pdf-data-label {
+            color: var(--primary);
+            font-weight: 800;
+            font-size: 14px;
+            margin-bottom: 6px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            padding-left: 5px;
+        }
+
         .pdf-data-value {
-            font-size: 20px;
-            padding: 10px 0;
-            border-bottom: 2px dashed #e0e0e0;
-            color: #333;
-            font-weight: 600;
+            font-size: 16px;
+            padding: 8px 0;
+            border-bottom: 2px solid #e0e0e0;
+            color: #222;
+            font-weight: 700;
+            background: linear-gradient(to right, #f9f9f9, #ffffff);
+            padding-left: 10px;
+            padding-right: 10px;
+            border-radius: 4px;
+            margin-top: 3px;
         }
 
         .pdf-value-highlight {
             color: var(--success);
-            font-size: 22px;
+            font-size: 18px;
+            font-weight: 900;
+            text-shadow: 0 1px 2px rgba(0, 200, 83, 0.2);
+            background: linear-gradient(to right, #f1f8e9, #ffffff);
+            border-left: 4px solid var(--success);
+            padding: 10px;
+            border-radius: 6px;
+        }
+
+        .pdf-observations {
+            background: #f8f9fa;
+            padding: 18px;
+            border-radius: 8px;
+            margin-top: 25px;
+            border-left: 4px solid var(--secondary);
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.08);
+            border-top: 1px solid #e0e0e0;
+            border-right: 1px solid #e0e0e0;
+            border-bottom: 1px solid #e0e0e0;
+        }
+
+        .pdf-observations-title {
+            color: var(--primary);
+            font-size: 16px;
             font-weight: 800;
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .pdf-observations-text {
+            color: #222;
+            font-size: 14px;
+            line-height: 1.5;
+            font-weight: 500;
+            padding: 5px;
         }
 
         .pdf-footer {
-            background: #f5f5f5;
-            padding: 30px;
+            background: linear-gradient(90deg, #f5f5f5, #e8e8e8);
+            padding: 20px;
             text-align: center;
             border-top: 3px solid var(--secondary);
-            margin-top: 50px;
+            margin-top: 25px;
+            box-shadow: inset 0 3px 10px rgba(0, 0, 0, 0.05);
         }
 
         .pdf-footer-text {
             color: var(--primary);
-            font-size: 20px;
-            font-weight: 700;
-            margin-bottom: 10px;
+            font-size: 16px;
+            font-weight: 800;
+            margin-bottom: 8px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
         }
 
         .pdf-footer-subtext {
-            color: #666;
-            font-size: 16px;
+            color: #555;
+            font-size: 14px;
             font-style: italic;
+            font-weight: 500;
         }
 
         /* Responsividade */
@@ -791,15 +956,39 @@
             .pdf-header {
                 flex-direction: column;
                 text-align: center;
-                gap: 20px;
+                gap: 10px;
             }
             
             .pdf-logo {
-                width: 180px;
+                width: 120px;
             }
             
             .pdf-main-title {
                 text-align: center;
+                font-size: 22px;
+            }
+            
+            .pdf-data-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .pdf-data-item {
+                margin-bottom: 15px;
+            }
+            
+            .ai-btn {
+                position: relative;
+                right: auto;
+                top: auto;
+                margin-top: 10px;
+                width: 100%;
+            }
+            
+            .ai-status {
+                position: relative;
+                right: auto;
+                top: auto;
+                margin-top: 5px;
             }
         }
 
@@ -997,9 +1186,16 @@
                             
                             <div class="form-group">
                                 <label class="form-label">
+                                    <i class="fas fa-tachometer-alt"></i> Odômetro (Km)
+                                </label>
+                                <input type="text" class="form-control" id="odometro" placeholder="15.500 km">
+                            </div>
+                            
+                            <div class="form-group">
+                                <label class="form-label">
                                     <i class="fas fa-calendar-alt"></i> Ano
                                 </label>
-                                <input type="number" class="form-control" id="ano" placeholder="2023" min="1900" max="2099">
+                                <input type="text" class="form-control" id="ano" placeholder="2023 ou 2023/2024">
                             </div>
                             
                             <div class="form-group">
@@ -1014,6 +1210,35 @@
                                     <i class="fas fa-dollar-sign"></i> Valor de Venda
                                 </label>
                                 <input type="text" class="form-control" id="valor" placeholder="R$ 35.900,00">
+                            </div>
+                            
+                            <div class="form-group">
+                                <label class="form-label">
+                                    <i class="fas fa-info-circle"></i> Status
+                                </label>
+                                <div class="status-container">
+                                    <div class="status-option status-disponivel active" data-status="Disponível">
+                                        <i class="fas fa-check-circle"></i> Disponível
+                                    </div>
+                                    <div class="status-option status-vendido" data-status="Vendido">
+                                        <i class="fas fa-check-circle"></i> Vendido
+                                    </div>
+                                    <div class="status-option status-reservado" data-status="Reservado">
+                                        <i class="fas fa-clock"></i> Reservado
+                                    </div>
+                                </div>
+                                <input type="hidden" id="status" value="Disponível">
+                            </div>
+                            
+                            <div class="form-group ai-btn-container" style="grid-column: span 2;">
+                                <label class="form-label">
+                                    <i class="fas fa-sticky-note"></i> Observações
+                                    <button class="ai-btn" id="aiGenerateBtn">
+                                        <i class="fas fa-robot"></i> Gerar com IA
+                                    </button>
+                                    <span class="ai-status" id="aiStatus"></span>
+                                </label>
+                                <textarea class="form-control" id="observacao" placeholder="Digite ou clique em 'Gerar com IA' para preencher automaticamente..." rows="3"></textarea>
                             </div>
                         </div>
                         
@@ -1087,6 +1312,7 @@
         class FichaTecnicaSystem {
             constructor() {
                 this.savedFichas = JSON.parse(localStorage.getItem('2m_motos_fichas')) || [];
+                this.aiTimeout = null;
                 this.init();
             }
             
@@ -1097,6 +1323,7 @@
                 this.renderFichasList();
                 this.setupFormValidation();
                 this.updateLastUpdateTime();
+                this.setupAIAutoFill();
                 
                 // Atualizar hora a cada minuto
                 setInterval(() => this.updateLastUpdateTime(), 60000);
@@ -1123,6 +1350,16 @@
                 document.getElementById('quickPreviewBtn').addEventListener('click', () => this.previewPDF());
                 document.getElementById('quickDownloadBtn').addEventListener('click', () => this.generateAndSavePDF());
                 document.getElementById('clearAllBtn').addEventListener('click', () => this.clearAllFichas());
+                document.getElementById('aiGenerateBtn').addEventListener('click', () => this.generateObservationsAI());
+                
+                // Status options
+                document.querySelectorAll('.status-option').forEach(option => {
+                    option.addEventListener('click', () => {
+                        document.querySelectorAll('.status-option').forEach(opt => opt.classList.remove('active'));
+                        option.classList.add('active');
+                        document.getElementById('status').value = option.dataset.status;
+                    });
+                });
                 
                 // Modal
                 document.getElementById('closePreviewModal').addEventListener('click', () => {
@@ -1138,6 +1375,36 @@
                 // Formatação de campos
                 document.getElementById('placa').addEventListener('input', this.formatPlaca);
                 document.getElementById('valor').addEventListener('input', this.formatCurrency);
+                document.getElementById('odometro').addEventListener('input', this.formatOdometro);
+            }
+            
+            setupAIAutoFill() {
+                const modeloInput = document.getElementById('modelo');
+                const marcaInput = document.getElementById('marca');
+                
+                // Ativação automática ao digitar modelo
+                modeloInput.addEventListener('input', () => {
+                    clearTimeout(this.aiTimeout);
+                    
+                    const modelo = modeloInput.value.trim().toLowerCase();
+                    const marca = marcaInput.value.trim().toLowerCase();
+                    
+                    if (modelo.length > 2 && marca.length > 0) {
+                        this.showAIStatus('Analisando modelo...');
+                        this.aiTimeout = setTimeout(() => this.generateObservationsAI(), 1500);
+                    }
+                });
+                
+                // Ativação automática ao selecionar marca
+                marcaInput.addEventListener('change', () => {
+                    const modelo = modeloInput.value.trim().toLowerCase();
+                    const marca = marcaInput.value.trim().toLowerCase();
+                    
+                    if (modelo.length > 2 && marca.length > 0) {
+                        this.showAIStatus('Analisando modelo...');
+                        this.aiTimeout = setTimeout(() => this.generateObservationsAI(), 1000);
+                    }
+                });
             }
             
             formatPlaca(e) {
@@ -1162,6 +1429,19 @@
                     style: 'currency',
                     currency: 'BRL'
                 });
+            }
+            
+            formatOdometro(e) {
+                let value = e.target.value.replace(/\D/g, '');
+                
+                if (value.length === 0) {
+                    e.target.value = '';
+                    return;
+                }
+                
+                // Formata como número com separador de milhar
+                const number = parseInt(value);
+                e.target.value = number.toLocaleString('pt-BR') + ' km';
             }
             
             updateDate() {
@@ -1189,7 +1469,10 @@
                     modelo: document.getElementById('modelo').value.trim(),
                     ano: document.getElementById('ano').value.trim(),
                     cor: document.getElementById('cor').value.trim(),
+                    odometro: document.getElementById('odometro').value.trim(),
                     valor: document.getElementById('valor').value.trim(),
+                    status: document.getElementById('status').value,
+                    observacao: document.getElementById('observacao').value.trim(),
                     dataCriacao: new Date().toISOString(),
                     id: Date.now().toString() + Math.random().toString(36).substr(2, 9)
                 };
@@ -1205,8 +1488,8 @@
                 if (!data.marca) errors.push('Marca é obrigatória');
                 if (!data.modelo) errors.push('Modelo é obrigatório');
                 if (!data.ano) errors.push('Ano é obrigatório');
-                else if (parseInt(data.ano) < 1900 || parseInt(data.ano) > new Date().getFullYear() + 1)
-                    errors.push('Ano inválido');
+                else if (!/^\d{4}(\/\d{4})?$/.test(data.ano))
+                    errors.push('Formato de ano inválido (use: 2023 ou 2023/2024)');
                 
                 if (!data.cor) errors.push('Cor é obrigatória');
                 if (!data.valor) errors.push('Valor é obrigatório');
@@ -1231,6 +1514,190 @@
                 });
             }
             
+            // Base de conhecimento IA para motos
+            getMotorcycleAIKnowledge() {
+                return {
+                    // Honda
+                    'honda': {
+                        'cb 500x': 'Aventureira versátil com motor 471cc, ideal para viagens e cidade. Economia de combustível e manutenção acessível. Conforto excelente para percursos longos.',
+                        'cb 600rr': 'Esportiva de alta performance com motor 599cc de 4 cilindros. Aerodinâmica agressiva e eletrônica avançada. Ideal para track days e estradas sinuosas.',
+                        'biz': 'Scooter econômica e prática para o dia a dia urbano. Baixo consumo e manutenção simples. Ideal para deslocamentos curtos na cidade.',
+                        'cg 160': 'Popular urbana com motor 160cc confiável e econômico. Baixa manutenção e excelente custo-benefício. Ideal para trabalho e deslocamento diário.',
+                        'xre 300': 'Trail aventureira com motor 291cc e suspensão generosa. Versátil para asfalto e trilhas leves. Consumo equilibrado e conforto em estradas.'
+                    },
+                    
+                    // Yamaha
+                    'yamaha': {
+                        'mt-07': 'Naked esportiva com motor CP2 de 689cc e torque linear. Design agressivo e diversão garantida ao pilotar. Excelente custo-benefício na categoria.',
+                        'r1': 'Superesportiva de alta tecnologia com motor crossplane de 998cc. Eletrônica sofisticada e aerodinâmica de competição. Para pilotos que buscam performance extrema.',
+                        'xtz 250': 'Trail confiável e econômica para asfalto e trilhas leves. Suspensão generosa e posição de pilotagem confortável. Ideal para iniciantes e uso misto.',
+                        'fazer 250': 'Sport touring com motor 250cc econômico e potente. Conforto para viagens e agilidade urbana. Excelente opção para quem busca versatilidade.',
+                        'nmix': 'Scooter elétrica com design moderno e tecnologia avançada. Zero emissões e baixo custo de manutenção. Ideal para mobilidade urbana sustentável.'
+                    },
+                    
+                    // BMW
+                    'bmw': {
+                        'r 1250 gs': 'Topo de linha das aventureiras com motor Boxer de 1254cc. Tecnologia avançada como Dynamic ESA e Pro. Referência em viagens longas e off-road.',
+                        's 1000 rr': 'Superesportiva alemã com motor de 999cc e 207cv. Eletrônica de ponta e chassis balanceado. Competição direta com as melhores do segmento.',
+                        'f 750 gs': 'Aventureira média com motor 853cc e eletrônica avançada. Versátil para cidade e estrada. Excelente introdução ao mundo adventure.',
+                        'c 400 gt': 'Scooter premium com motor 350cc e transmissão automática. Conforto e tecnologia para o dia a dia. Ideal para quem busca praticidade com conforto.'
+                    },
+                    
+                    // Harley Davidson
+                    'harley davidson': {
+                        'sportster': 'Ícone do estilo cruiser com motor V-Twin característico. Som marcante e customização infinita. Tradição e personalidade em duas rodas.',
+                        'street glide': 'Touring completa com aerofólio, sistema de som e bagageiros. Conforto máximo para viagens interestaduais. O cruiser definitivo para estrada.',
+                        'fat boy': 'Cruiser pesado com pneus largos e design robusto. Estilo inconfundível e presença de estrada. Para quem busca personalidade acima de tudo.',
+                        'livewire': 'Elétrica premium com aceleração instantânea e tecnologia conectada. Silêncio e torque máximo desde as baixas rotações. O futuro da marca.'
+                    },
+                    
+                    // Ducati
+                    'ducati': {
+                        'monster': 'Ícone das nakeds com motor L-Twin e chassi treliçado. Design minimalista e performance emocionante. Combinação perfeita de estilo e esportividade.',
+                        'panigale': 'Superesportiva italiana com design inspirado em MotoGP. Tecnologia de ponta e performance de competição. Para quem busca a emoção máxima sobre duas rodas.',
+                        'multistrada': 'Aventureira premium com motor V-Twin e suspensão eletrônica. Versátil para todos os tipos de estrada. Elegância italiana em viagens de aventura.',
+                        'scrambler': 'Retrô moderna com estilo cafe racer e tecnologia atual. Diversão garantida com posição relaxada. Para quem busca estilo sem abrir mão de performance.'
+                    },
+                    
+                    // Kawasaki
+                    'kawasaki': {
+                        'ninja 650': 'Esportiva de médio porte com motor bicilíndrico equilibrado. Posição menos radical e bom para uso misto. Ideal para quem busca esportividade com conforto.',
+                        'z900': 'Naked potente com motor 948cc de 4 cilindros. Torque em baixas rotações e design agressivo. Diversão garantida com eletrônica moderna.',
+                        'versys 650': 'Aventureira versátil com motor 649cc e posição confortável. Ideal para viagens e uso urbano. Excelente custo-benefício no segmento.',
+                        'ninja h2': 'Superesportiva com supercharger e 231cv. Performance extrema com tecnologia de ponta. Para os que buscam a experiência máxima de velocidade.'
+                    },
+                    
+                    // Suzuki
+                    'suzuki': {
+                        'gsx-r 750': 'Lenda das esportivas com equilíbrio perfeito entre cilindradas. Tradição e performance comprovadas. A moto que definiu o segmento esportivo.',
+                        'v-strom 650': 'Aventureira confiável com motor V-Twin de 645cc. Versátil para asfalto e estradas de terra. Excelente relação custo-benefício no segmento adventure.',
+                        'hayabusa': 'Ícone da velocidade com aerodinâmica única e motor 1340cc. A moto mais rápida do mundo por muitos anos. Performance extrema com conforto surpreendente.',
+                        'burgman 400': 'Maxi-scooter com motor 400cc e transmissão automática. Conforto premium e capacidade de bagagem. Ideal para viagens urbanas e intermunicipais.'
+                    },
+                    
+                    // Triumph
+                    'triumph': {
+                        'street triple': 'Naked britânica com motor 3 cilindros único. Agilidade urbana e performance emocionante. Design moderno com toque clássico inglês.',
+                        'tiger 900': 'Aventureira premium com motor T-plane triple de 888cc. Tecnologia sofisticada e capacidade off-road. Elegancia britânica em viagens de aventura.',
+                        'bonneville': 'Clássico moderno com estilo retrô e tecnologia atual. Tradição britânica com confiabilidade moderna. Para quem busca personalidade e estilo.',
+                        'rocket 3': 'Cruiser com maior motor de produção em motocicletas (2458cc). Torque monumental e presença imponente. A fusão perfeita entre tradição e modernidade.'
+                    },
+                    
+                    // Padrões genéricos por tipo
+                    'padroes': {
+                        'adventure': 'Aventureira versátil para todos os tipos de terreno. Suspensão generosa e conforto para longas viagens. Ideal para quem busca liberdade na estrada.',
+                        'naked': 'Esportiva sem carenagem com posição confortável. Torque linear e agilidade urbana excelente. Design moderno que chama atenção.',
+                        'sport': 'Esportiva de alta performance com aerodinâmica agressiva. Aceleração rápida e estabilidade em curvas. Para quem busca adrenalina sobre duas rodas.',
+                        'cruiser': 'Estilo clássico com posição relaxada e motor de alto torque. Conforto em viagens e presença de estrada. Personalidade única e inconfundível.',
+                        'trail': 'Versátil para asfalto e estradas de terra. Posição alta e suspensão para irregularidades. Ideal para quem busca liberdade na cidade e no campo.',
+                        'scooter': 'Praticidade urbana com transmissão automática. Baixo consumo e facilidade de pilotagem. Ideal para o dia a dia no trânsito caótico.'
+                    }
+                };
+            }
+            
+            generateObservationsAI() {
+                const modelo = document.getElementById('modelo').value.trim().toLowerCase();
+                const marca = document.getElementById('marca').value.trim().toLowerCase();
+                const aiBtn = document.getElementById('aiGenerateBtn');
+                
+                if (!modelo || !marca) {
+                    this.showAIStatus('Digite marca e modelo', 'warning');
+                    return;
+                }
+                
+                // Desabilitar botão durante processamento
+                aiBtn.disabled = true;
+                aiBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Gerando...';
+                this.showAIStatus('Consultando base de dados...');
+                
+                // Simular processamento
+                setTimeout(() => {
+                    const knowledge = this.getMotorcycleAIKnowledge();
+                    let observacao = '';
+                    
+                    // Tentar encontrar correspondência exata
+                    if (knowledge[marca] && knowledge[marca][modelo]) {
+                        observacao = knowledge[marca][modelo];
+                    } else {
+                        // Buscar por correspondência parcial
+                        for (const [marcaKey, modelos] of Object.entries(knowledge)) {
+                            if (marca.includes(marcaKey) || marcaKey.includes(marca)) {
+                                for (const [modeloKey, desc] of Object.entries(modelos)) {
+                                    if (modelo.includes(modeloKey) || modeloKey.includes(modelo)) {
+                                        observacao = desc;
+                                        break;
+                                    }
+                                }
+                                if (observacao) break;
+                            }
+                        }
+                        
+                        // Se não encontrou, usar padrão baseado no tipo
+                        if (!observacao) {
+                            const tipoPadrao = this.detectarTipoMoto(modelo, marca);
+                            observacao = knowledge.padroes[tipoPadrao] || knowledge.padroes['naked'];
+                        }
+                    }
+                    
+                    // Adaptar ao status
+                    const status = document.getElementById('status').value;
+                    if (status === 'Vendido') {
+                        observacao += ' MOTOCICLETA VENDIDA - Documentação em dia e entrega agendada.';
+                    } else if (status === 'Reservado') {
+                        observacao += ' MOTOCICLETA RESERVADA - Aguardando documentação e finalização.';
+                    }
+                    
+                    // Preencher campo de observação
+                    document.getElementById('observacao').value = observacao;
+                    
+                    // Restaurar botão
+                    aiBtn.disabled = false;
+                    aiBtn.innerHTML = '<i class="fas fa-robot"></i> Gerar com IA';
+                    this.showAIStatus('Observação gerada!', 'success');
+                    
+                    setTimeout(() => {
+                        document.getElementById('aiStatus').style.display = 'none';
+                    }, 3000);
+                    
+                }, 1200);
+            }
+            
+            detectarTipoMoto(modelo, marca) {
+                const tipos = {
+                    'adventure': ['gs', 'tiger', 'versys', 'v-strom', 'cb 500x', 'ténéré'],
+                    'naked': ['mt', 'z', 'monster', 'street triple', 'speed triple'],
+                    'sport': ['r', 'rr', 'panigale', 'ninja', 'gsx', 'cbr', 'yzf'],
+                    'cruiser': ['harley', 'shadow', 'vulcan', 'boulevard', 'intruder'],
+                    'trail': ['xr', 'crf', 'wr', 'dr', 'klx', 'trip', 'xtz'],
+                    'scooter': ['pcx', 'nmax', 'burgman', 'forza', 'x-max']
+                };
+                
+                for (const [tipo, palavras] of Object.entries(tipos)) {
+                    if (palavras.some(palavra => modelo.includes(palavra) || marca.includes(palavra))) {
+                        return tipo;
+                    }
+                }
+                
+                return 'naked'; // Padrão
+            }
+            
+            showAIStatus(message, type = 'info') {
+                const statusEl = document.getElementById('aiStatus');
+                statusEl.textContent = message;
+                statusEl.style.display = 'inline-flex';
+                
+                if (type === 'success') {
+                    statusEl.style.background = 'rgba(0, 200, 83, 0.2)';
+                    statusEl.style.color = '#00c853';
+                } else if (type === 'warning') {
+                    statusEl.style.background = 'rgba(255, 145, 0, 0.2)';
+                    statusEl.style.color = '#ff9100';
+                } else {
+                    statusEl.style.background = 'rgba(255, 61, 0, 0.2)';
+                    statusEl.style.color = '#ffab00';
+                }
+            }
+            
             generatePDFContent(data) {
                 const dataCriacao = new Date(data.dataCriacao);
                 const dataFormatada = dataCriacao.toLocaleDateString('pt-BR', {
@@ -1241,7 +1708,11 @@
                     minute: '2-digit'
                 });
                 
-                // NOVA LOGO: https://i.ibb.co/DD98rjsH/logo1.png
+                // Determinar cor do status
+                let statusColor = '#00c853'; // Disponível - verde
+                if (data.status === 'Vendido') statusColor = '#f44336'; // Vendido - vermelho
+                if (data.status === 'Reservado') statusColor = '#ff9100'; // Reservado - laranja
+                
                 return `
                     <div class="pdf-header">
                         <img src="https://i.ibb.co/DD98rjsH/logo1.png" alt="Logo 2M Motos" class="pdf-logo">
@@ -1283,12 +1754,31 @@
                             </div>
                             
                             <div class="pdf-data-item">
+                                <div class="pdf-data-label">Odômetro (Km)</div>
+                                <div class="pdf-data-value">${data.odometro || '[NÃO INFORMADO]'}</div>
+                            </div>
+                            
+                            <div class="pdf-data-item">
+                                <div class="pdf-data-label">Status</div>
+                                <div class="pdf-data-value" style="color: ${statusColor}; font-weight: 900;">${data.status}</div>
+                            </div>
+                            
+                            <div class="pdf-data-item">
                                 <div class="pdf-data-label">Valor de Venda</div>
                                 <div class="pdf-data-value pdf-value-highlight">
                                     ${data.valor || '[NÃO INFORMADO]'}
                                 </div>
                             </div>
                         </div>
+                        
+                        ${data.observacao ? `
+                        <div class="pdf-observations">
+                            <div class="pdf-observations-title">
+                                <i class="fas fa-sticky-note"></i> OBSERVAÇÕES
+                            </div>
+                            <p class="pdf-observations-text">${data.observacao}</p>
+                        </div>
+                        ` : ''}
                         
                         <div class="pdf-footer">
                             <div class="pdf-footer-text">Procure o Vendedor para mais informações e detalhes</div>
@@ -1335,25 +1825,35 @@
                 this.savedFichas.unshift(data);
                 localStorage.setItem('2m_motos_fichas', JSON.stringify(this.savedFichas));
                 
-                // Gerar PDF
+                // Gerar PDF com espaçamento otimizado para A4
                 const element = document.createElement('div');
                 element.innerHTML = this.generatePDFContent(data);
                 element.style.width = '210mm';
-                element.style.padding = '20mm';
+                element.style.minHeight = '297mm';
+                element.style.padding = '12mm';
+                element.style.margin = '0';
+                element.style.boxSizing = 'border-box';
+                element.style.fontSize = '13px';
                 
                 const options = {
-                    margin: 10,
-                    filename: `ficha-tecnica-${data.placa.replace(/\W/g, '')}-${Date.now()}.pdf`,
-                    image: { type: 'jpeg', quality: 0.98 },
+                    margin: 5,
+                    filename: `ficha-tecnica-${data.placa.replace(/\W/g, '')}.pdf`,
+                    image: { 
+                        type: 'jpeg', 
+                        quality: 0.95 
+                    },
                     html2canvas: { 
                         scale: 2,
                         useCORS: true,
-                        logging: false
+                        logging: false,
+                        width: 794,
+                        height: 1123
                     },
                     jsPDF: { 
                         unit: 'mm', 
                         format: 'a4', 
-                        orientation: 'portrait' 
+                        orientation: 'portrait',
+                        compress: true
                     }
                 };
                 
@@ -1387,7 +1887,14 @@
                 document.getElementById('modelo').value = '';
                 document.getElementById('ano').value = '';
                 document.getElementById('cor').value = '';
+                document.getElementById('odometro').value = '';
                 document.getElementById('valor').value = '';
+                document.getElementById('observacao').value = '';
+                document.getElementById('status').value = 'Disponível';
+                
+                // Resetar status visual
+                document.querySelectorAll('.status-option').forEach(opt => opt.classList.remove('active'));
+                document.querySelector('.status-disponivel').classList.add('active');
             }
             
             renderFichasList() {
@@ -1408,6 +1915,11 @@
                 this.savedFichas.forEach((ficha, index) => {
                     const dataCriacao = new Date(ficha.dataCriacao);
                     const dataFormatada = dataCriacao.toLocaleDateString('pt-BR');
+                    
+                    // Determinar cor do status
+                    let statusClass = 'status-disponivel';
+                    if (ficha.status === 'Vendido') statusClass = 'status-vendido';
+                    if (ficha.status === 'Reservado') statusClass = 'status-reservado';
                     
                     html += `
                         <div class="pdf-item slide-in">
@@ -1430,6 +1942,10 @@
                                 <div class="pdf-detail">
                                     <span class="detail-label">Ano:</span>
                                     <span class="detail-value">${ficha.ano}</span>
+                                </div>
+                                <div class="pdf-detail">
+                                    <span class="detail-label">Status:</span>
+                                    <span class="detail-value"><span class="${statusClass}" style="font-size: 11px;">${ficha.status}</span></span>
                                 </div>
                                 <div class="pdf-detail">
                                     <span class="detail-label">Valor:</span>
@@ -1478,21 +1994,31 @@
                     const element = document.createElement('div');
                     element.innerHTML = this.generatePDFContent(ficha);
                     element.style.width = '210mm';
-                    element.style.padding = '20mm';
+                    element.style.minHeight = '297mm';
+                    element.style.padding = '12mm';
+                    element.style.margin = '0';
+                    element.style.boxSizing = 'border-box';
+                    element.style.fontSize = '13px';
                     
                     const options = {
-                        margin: 10,
+                        margin: 5,
                         filename: `ficha-tecnica-${ficha.placa.replace(/\W/g, '')}.pdf`,
-                        image: { type: 'jpeg', quality: 0.98 },
+                        image: { 
+                            type: 'jpeg', 
+                            quality: 0.95 
+                        },
                         html2canvas: { 
                             scale: 2,
                             useCORS: true,
-                            logging: false
+                            logging: false,
+                            width: 794,
+                            height: 1123
                         },
                         jsPDF: { 
                             unit: 'mm', 
                             format: 'a4', 
-                            orientation: 'portrait' 
+                            orientation: 'portrait',
+                            compress: true
                         }
                     };
                     
@@ -1557,8 +2083,11 @@
                         modelo: 'CB 500X',
                         ano: '2023',
                         cor: 'Vermelha',
+                        odometro: '8.500 km',
                         valor: 'R$ 35.900,00',
-                        dataCriacao: new Date(Date.now() - 86400000).toISOString(), // 1 dia atrás
+                        status: 'Disponível',
+                        observacao: 'Aventureira versátil com motor 471cc, ideal para viagens e cidade. Economia de combustível e manutenção acessível. Conforto excelente para percursos longos.',
+                        dataCriacao: new Date(Date.now() - 86400000).toISOString(),
                         id: 'exemplo1'
                     },
                     {
@@ -1567,19 +2096,12 @@
                         modelo: 'MT-07',
                         ano: '2022',
                         cor: 'Azul',
+                        odometro: '22.300 km',
                         valor: 'R$ 42.500,00',
-                        dataCriacao: new Date(Date.now() - 172800000).toISOString(), // 2 dias atrás
+                        status: 'Vendido',
+                        observacao: 'Naked esportiva com motor CP2 de 689cc e torque linear. Design agressivo e diversão garantida ao pilotar. Excelente custo-benefício na categoria.',
+                        dataCriacao: new Date(Date.now() - 172800000).toISOString(),
                         id: 'exemplo2'
-                    },
-                    {
-                        placa: 'DEF-5G67',
-                        marca: 'BMW',
-                        modelo: 'R 1250 GS',
-                        ano: '2023',
-                        cor: 'Preta',
-                        valor: 'R$ 89.900,00',
-                        dataCriacao: new Date(Date.now() - 259200000).toISOString(), // 3 dias atrás
-                        id: 'exemplo3'
                     }
                 ];
                 
@@ -1593,9 +2115,15 @@
             document.getElementById('placa').value = 'MOT-0R23';
             document.getElementById('marca').value = 'Ducati';
             document.getElementById('modelo').value = 'Panigale V4';
-            document.getElementById('ano').value = '2023';
+            document.getElementById('ano').value = '2023/2024';
             document.getElementById('cor').value = 'Vermelha';
+            document.getElementById('odometro').value = '5.800 km';
             document.getElementById('valor').value = 'R$ 129.900,00';
+            
+            // Gerar automaticamente a observação com IA
+            setTimeout(() => {
+                sistema.generateObservationsAI();
+            }, 500);
         });
     </script>
 </body>
