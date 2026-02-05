@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="pt-br">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -31,6 +32,7 @@
             padding: 0;
             position: relative;
             overflow-x: hidden;
+            font-size: 17px;
         }
 
         body::before {
@@ -40,7 +42,7 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background-image: 
+            background-image:
                 radial-gradient(circle at 20% 80%, rgba(255, 61, 0, 0.1) 0%, transparent 50%),
                 radial-gradient(circle at 80% 20%, rgba(255, 171, 0, 0.1) 0%, transparent 50%);
             z-index: -1;
@@ -50,7 +52,7 @@
         .main-container {
             display: flex;
             min-height: 100vh;
-            max-width: 1600px;
+            max-width: 1700px;
             margin: 0 auto;
             box-shadow: 0 0 50px rgba(0, 0, 0, 0.5);
             position: relative;
@@ -58,10 +60,10 @@
 
         /* Sidebar */
         .sidebar {
-            width: 280px;
+            width: 320px;
             background: rgba(13, 21, 56, 0.95);
             backdrop-filter: blur(10px);
-            padding: 30px 20px;
+            padding: 25px 20px;
             border-right: 2px solid var(--secondary);
             position: relative;
             overflow-y: auto;
@@ -70,60 +72,62 @@
 
         .logo-container {
             text-align: center;
-            margin-bottom: 40px;
+            margin-bottom: 35px;
             padding-bottom: 20px;
             border-bottom: 1px solid rgba(255, 61, 0, 0.3);
         }
 
         .logo {
-            width: 180px;
+            width: 220px;
             height: auto;
-            filter: drop-shadow(0 0 10px rgba(255, 61, 0, 0.5));
+            filter: drop-shadow(0 0 12px rgba(255, 61, 0, 0.5));
             margin-bottom: 15px;
         }
 
         .logo-text {
             color: white;
-            font-size: 24px;
+            font-size: 32px;
             font-weight: 900;
-            letter-spacing: 2px;
+            letter-spacing: 3px;
             text-transform: uppercase;
             background: linear-gradient(90deg, var(--accent), var(--secondary));
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
-            text-shadow: 0 2px 10px rgba(255, 61, 0, 0.3);
+            text-shadow: 0 2px 15px rgba(255, 61, 0, 0.3);
+            margin-top: 5px;
         }
 
         .sidebar-title {
             color: var(--accent);
-            font-size: 18px;
-            font-weight: 600;
+            font-size: 22px;
+            font-weight: 700;
             margin: 30px 0 15px 0;
             display: flex;
             align-items: center;
             gap: 10px;
             text-transform: uppercase;
-            letter-spacing: 1px;
+            letter-spacing: 1.5px;
         }
 
         .sidebar-title i {
             color: var(--secondary);
+            font-size: 20px;
         }
 
         .menu-btn {
             width: 100%;
-            padding: 15px 20px;
+            padding: 16px 18px;
             background: rgba(255, 61, 0, 0.1);
             border: 1px solid rgba(255, 61, 0, 0.3);
             color: white;
-            border-radius: 8px;
+            border-radius: 10px;
             margin-bottom: 10px;
             cursor: pointer;
             display: flex;
             align-items: center;
             gap: 15px;
-            font-size: 16px;
-            font-weight: 500;
+            font-size: 18px;
+            font-weight: 600;
             transition: all 0.3s ease;
             text-align: left;
         }
@@ -132,32 +136,34 @@
             background: rgba(255, 61, 0, 0.2);
             transform: translateX(5px);
             border-color: var(--secondary);
+            box-shadow: 0 5px 15px rgba(255, 61, 0, 0.2);
         }
 
         .menu-btn.active {
             background: linear-gradient(90deg, rgba(255, 61, 0, 0.3), rgba(255, 171, 0, 0.3));
             border-color: var(--secondary);
-            box-shadow: 0 0 15px rgba(255, 61, 0, 0.3);
+            box-shadow: 0 0 20px rgba(255, 61, 0, 0.4);
         }
 
         .menu-btn i {
-            font-size: 20px;
+            font-size: 22px;
             color: var(--accent);
-            width: 24px;
+            width: 25px;
         }
 
         .pdf-counter {
             background: var(--secondary);
             color: white;
             border-radius: 50%;
-            width: 24px;
-            height: 24px;
+            width: 28px;
+            height: 28px;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 12px;
+            font-size: 14px;
             font-weight: bold;
             margin-left: auto;
+            box-shadow: 0 2px 8px rgba(255, 61, 0, 0.3);
         }
 
         /* Conteúdo Principal */
@@ -184,38 +190,47 @@
             align-items: center;
             margin-bottom: 30px;
             padding-bottom: 20px;
-            border-bottom: 1px solid rgba(255, 61, 0, 0.3);
+            border-bottom: 2px solid rgba(255, 61, 0, 0.3);
         }
 
         .content-title {
-            font-size: 32px;
-            font-weight: 800;
+            font-size: 42px;
+            font-weight: 900;
             background: linear-gradient(90deg, var(--accent), var(--secondary));
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
-            text-shadow: 0 2px 10px rgba(255, 61, 0, 0.3);
+            text-shadow: 0 2px 15px rgba(255, 61, 0, 0.3);
+            letter-spacing: 1px;
         }
 
         .content-subtitle {
-            color: rgba(255, 255, 255, 0.8);
-            font-size: 16px;
-            margin-top: 5px;
+            color: rgba(255, 255, 255, 0.85);
+            font-size: 20px;
+            margin-top: 8px;
+            font-weight: 500;
         }
 
         .date-info {
             color: var(--accent);
-            font-weight: 600;
-            font-size: 14px;
+            font-weight: 700;
+            font-size: 18px;
             text-align: right;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .date-info i {
+            font-size: 20px;
         }
 
         /* Cards */
         .card {
             background: rgba(13, 21, 56, 0.7);
-            border-radius: 15px;
+            border-radius: 18px;
             border: 1px solid rgba(255, 61, 0, 0.2);
             backdrop-filter: blur(10px);
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            box-shadow: 0 12px 35px rgba(0, 0, 0, 0.3);
             overflow: hidden;
             margin-bottom: 30px;
             transition: transform 0.3s ease, box-shadow 0.3s ease;
@@ -223,26 +238,26 @@
 
         .card:hover {
             transform: translateY(-5px);
-            box-shadow: 0 15px 40px rgba(255, 61, 0, 0.2);
+            box-shadow: 0 20px 45px rgba(255, 61, 0, 0.2);
         }
 
         .card-header {
             background: linear-gradient(90deg, rgba(255, 61, 0, 0.2), rgba(255, 171, 0, 0.2));
-            padding: 20px 30px;
+            padding: 22px 30px;
             display: flex;
             align-items: center;
             gap: 15px;
-            border-bottom: 1px solid rgba(255, 61, 0, 0.3);
+            border-bottom: 2px solid rgba(255, 61, 0, 0.3);
         }
 
         .card-header i {
             color: var(--accent);
-            font-size: 24px;
+            font-size: 26px;
         }
 
         .card-title {
-            font-size: 22px;
-            font-weight: 700;
+            font-size: 28px;
+            font-weight: 800;
             color: white;
         }
 
@@ -263,47 +278,51 @@
 
         .form-label {
             display: block;
-            margin-bottom: 10px;
+            margin-bottom: 12px;
             color: var(--accent);
-            font-weight: 600;
-            font-size: 16px;
+            font-weight: 700;
+            font-size: 18px;
             display: flex;
             align-items: center;
             gap: 10px;
             text-transform: uppercase;
-            letter-spacing: 0.5px;
+            letter-spacing: 0.8px;
         }
 
         .form-label i {
             color: var(--secondary);
-            width: 20px;
+            width: 22px;
+            font-size: 20px;
         }
 
         .form-control {
             width: 100%;
-            padding: 15px 20px;
+            padding: 16px 18px;
             background: rgba(255, 255, 255, 0.1);
             border: 1px solid rgba(255, 61, 0, 0.3);
-            border-radius: 8px;
-            font-size: 16px;
+            border-radius: 10px;
+            font-size: 18px;
             color: white;
             transition: all 0.3s;
         }
 
         textarea.form-control {
-            min-height: 100px;
+            min-height: 120px;
             resize: vertical;
+            font-size: 17px;
+            line-height: 1.5;
         }
 
         .form-control:focus {
             outline: none;
             border-color: var(--secondary);
-            box-shadow: 0 0 0 3px rgba(255, 61, 0, 0.2);
+            box-shadow: 0 0 0 4px rgba(255, 61, 0, 0.2);
             background: rgba(255, 255, 255, 0.15);
         }
 
         .form-control::placeholder {
-            color: rgba(255, 255, 255, 0.5);
+            color: rgba(255, 255, 255, 0.6);
+            font-size: 16px;
         }
 
         /* Botão IA */
@@ -314,25 +333,26 @@
         .ai-btn {
             position: absolute;
             right: 10px;
-            top: 40px;
+            top: 42px;
             background: linear-gradient(90deg, var(--secondary), var(--accent));
             color: white;
             border: none;
-            border-radius: 6px;
-            padding: 8px 15px;
-            font-size: 12px;
-            font-weight: 600;
+            border-radius: 8px;
+            padding: 10px 18px;
+            font-size: 14px;
+            font-weight: 700;
             cursor: pointer;
             display: flex;
             align-items: center;
-            gap: 5px;
+            gap: 8px;
             transition: all 0.3s;
             z-index: 2;
+            box-shadow: 0 3px 10px rgba(255, 61, 0, 0.3);
         }
 
         .ai-btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(255, 61, 0, 0.4);
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(255, 61, 0, 0.5);
         }
 
         .ai-btn:disabled {
@@ -344,14 +364,15 @@
         .ai-status {
             position: absolute;
             right: 10px;
-            top: 85px;
+            top: 90px;
             background: rgba(255, 61, 0, 0.2);
             color: var(--accent);
-            border-radius: 15px;
-            padding: 4px 12px;
-            font-size: 11px;
-            font-weight: 600;
+            border-radius: 18px;
+            padding: 6px 14px;
+            font-size: 12px;
+            font-weight: 700;
             display: none;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
         }
 
         /* Status */
@@ -365,12 +386,12 @@
         .status-option {
             flex: 1;
             min-width: 120px;
-            padding: 12px 20px;
+            padding: 14px 18px;
             border: 2px solid rgba(255, 61, 0, 0.3);
-            border-radius: 8px;
+            border-radius: 10px;
             background: rgba(255, 255, 255, 0.05);
             color: white;
-            font-weight: 600;
+            font-weight: 700;
             cursor: pointer;
             transition: all 0.3s;
             text-align: center;
@@ -378,17 +399,19 @@
             align-items: center;
             justify-content: center;
             gap: 8px;
+            font-size: 16px;
         }
 
         .status-option:hover {
             background: rgba(255, 61, 0, 0.1);
             border-color: var(--secondary);
+            transform: translateY(-2px);
         }
 
         .status-option.active {
             background: rgba(255, 61, 0, 0.2);
             border-color: var(--secondary);
-            box-shadow: 0 0 10px rgba(255, 61, 0, 0.3);
+            box-shadow: 0 0 12px rgba(255, 61, 0, 0.4);
         }
 
         .status-disponivel.active {
@@ -417,11 +440,11 @@
         .action-btn {
             flex: 1;
             min-width: 200px;
-            padding: 18px 30px;
+            padding: 20px 30px;
             border: none;
-            border-radius: 10px;
-            font-size: 18px;
-            font-weight: 700;
+            border-radius: 12px;
+            font-size: 20px;
+            font-weight: 800;
             cursor: pointer;
             display: flex;
             align-items: center;
@@ -429,9 +452,10 @@
             gap: 15px;
             transition: all 0.3s ease;
             text-transform: uppercase;
-            letter-spacing: 1px;
+            letter-spacing: 1.5px;
             position: relative;
             overflow: hidden;
+            box-shadow: 0 6px 25px rgba(0, 0, 0, 0.3);
         }
 
         .action-btn::after {
@@ -450,35 +474,35 @@
         }
 
         .action-btn i {
-            font-size: 20px;
+            font-size: 22px;
         }
 
         .btn-primary {
             background: linear-gradient(90deg, var(--secondary), var(--accent));
             color: white;
-            box-shadow: 0 5px 20px rgba(255, 61, 0, 0.4);
+            box-shadow: 0 6px 25px rgba(255, 61, 0, 0.5);
         }
 
         .btn-primary:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 10px 25px rgba(255, 61, 0, 0.6);
+            transform: translateY(-5px);
+            box-shadow: 0 15px 35px rgba(255, 61, 0, 0.7);
         }
 
         .btn-success {
             background: linear-gradient(90deg, var(--success), #00e676);
             color: white;
-            box-shadow: 0 5px 20px rgba(0, 200, 83, 0.4);
+            box-shadow: 0 6px 25px rgba(0, 200, 83, 0.5);
         }
 
         .btn-success:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 10px 25px rgba(0, 200, 83, 0.6);
+            transform: translateY(-5px);
+            box-shadow: 0 15px 35px rgba(0, 200, 83, 0.7);
         }
 
         /* Lista de PDFs */
         .pdf-list-container {
             background: rgba(13, 21, 56, 0.7);
-            border-radius: 15px;
+            border-radius: 18px;
             border: 1px solid rgba(255, 61, 0, 0.2);
             backdrop-filter: blur(10px);
             padding: 30px;
@@ -495,51 +519,59 @@
         }
 
         .pdf-list-title {
-            font-size: 24px;
+            font-size: 28px;
             color: var(--accent);
-            font-weight: 700;
+            font-weight: 800;
             display: flex;
             align-items: center;
-            gap: 10px;
+            gap: 12px;
+        }
+
+        .pdf-list-title i {
+            font-size: 26px;
         }
 
         .clear-btn {
             background: rgba(255, 61, 0, 0.2);
             color: white;
-            border: 1px solid var(--secondary);
-            padding: 10px 20px;
-            border-radius: 6px;
+            border: 2px solid var(--secondary);
+            padding: 12px 20px;
+            border-radius: 8px;
             cursor: pointer;
             display: flex;
             align-items: center;
             gap: 8px;
-            font-weight: 600;
+            font-weight: 700;
+            font-size: 16px;
             transition: all 0.3s;
+            box-shadow: 0 3px 10px rgba(255, 61, 0, 0.2);
         }
 
         .clear-btn:hover {
             background: rgba(255, 61, 0, 0.4);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 15px rgba(255, 61, 0, 0.4);
         }
 
         .pdf-list {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
             gap: 20px;
         }
 
         .pdf-item {
             background: rgba(26, 35, 126, 0.5);
-            border: 1px solid rgba(255, 61, 0, 0.3);
-            border-radius: 10px;
-            padding: 20px;
+            border: 2px solid rgba(255, 61, 0, 0.3);
+            border-radius: 12px;
+            padding: 22px;
             transition: all 0.3s;
             position: relative;
         }
 
         .pdf-item:hover {
-            transform: translateY(-5px);
+            transform: translateY(-8px);
             border-color: var(--secondary);
-            box-shadow: 0 10px 20px rgba(255, 61, 0, 0.2);
+            box-shadow: 0 15px 30px rgba(255, 61, 0, 0.25);
         }
 
         .pdf-item-header {
@@ -547,14 +579,14 @@
             justify-content: space-between;
             align-items: center;
             margin-bottom: 15px;
-            padding-bottom: 10px;
-            border-bottom: 1px solid rgba(255, 61, 0, 0.2);
+            padding-bottom: 12px;
+            border-bottom: 2px solid rgba(255, 61, 0, 0.2);
         }
 
         .pdf-item-title {
-            font-weight: 700;
+            font-weight: 800;
             color: white;
-            font-size: 18px;
+            font-size: 20px;
             display: flex;
             align-items: center;
             gap: 10px;
@@ -562,12 +594,13 @@
 
         .pdf-item-title i {
             color: var(--accent);
+            font-size: 22px;
         }
 
         .pdf-item-date {
             color: var(--accent);
-            font-size: 12px;
-            font-weight: 600;
+            font-size: 14px;
+            font-weight: 700;
         }
 
         .pdf-item-details {
@@ -578,19 +611,19 @@
             display: flex;
             justify-content: space-between;
             margin-bottom: 8px;
-            padding: 5px 0;
-            border-bottom: 1px dashed rgba(255, 255, 255, 0.1);
+            padding: 6px 0;
+            border-bottom: 1px dashed rgba(255, 255, 255, 0.15);
         }
 
         .detail-label {
-            color: rgba(255, 255, 255, 0.7);
-            font-size: 14px;
+            color: rgba(255, 255, 255, 0.8);
+            font-size: 16px;
         }
 
         .detail-value {
             color: white;
-            font-weight: 600;
-            font-size: 14px;
+            font-weight: 700;
+            font-size: 16px;
         }
 
         .pdf-item-actions {
@@ -601,59 +634,77 @@
 
         .pdf-action-btn {
             flex: 1;
-            padding: 10px;
+            padding: 12px;
             border: none;
-            border-radius: 6px;
-            font-size: 14px;
-            font-weight: 600;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: 700;
             cursor: pointer;
             display: flex;
             align-items: center;
             justify-content: center;
             gap: 8px;
             transition: all 0.3s;
+            box-shadow: 0 3px 8px rgba(0, 0, 0, 0.2);
         }
 
         .pdf-view {
             background: rgba(255, 61, 0, 0.2);
             color: white;
-            border: 1px solid var(--secondary);
+            border: 2px solid var(--secondary);
         }
 
         .pdf-view:hover {
             background: rgba(255, 61, 0, 0.4);
+            transform: translateY(-3px);
+            box-shadow: 0 6px 15px rgba(255, 61, 0, 0.4);
         }
 
         .pdf-download {
             background: rgba(0, 200, 83, 0.2);
             color: white;
-            border: 1px solid var(--success);
+            border: 2px solid var(--success);
         }
 
         .pdf-download:hover {
             background: rgba(0, 200, 83, 0.4);
+            transform: translateY(-3px);
+            box-shadow: 0 6px 15px rgba(0, 200, 83, 0.4);
         }
 
         .pdf-delete {
             background: rgba(244, 67, 54, 0.2);
             color: white;
-            border: 1px solid #f44336;
+            border: 2px solid #f44336;
         }
 
         .pdf-delete:hover {
             background: rgba(244, 67, 54, 0.4);
+            transform: translateY(-3px);
+            box-shadow: 0 6px 15px rgba(244, 67, 54, 0.4);
         }
 
         .empty-list {
             text-align: center;
             padding: 50px 20px;
-            color: rgba(255, 255, 255, 0.5);
+            color: rgba(255, 255, 255, 0.6);
+            font-size: 18px;
         }
 
         .empty-list i {
-            font-size: 50px;
+            font-size: 60px;
             margin-bottom: 20px;
             color: rgba(255, 61, 0, 0.3);
+        }
+
+        .empty-list h3 {
+            font-size: 24px;
+            margin-bottom: 12px;
+            font-weight: 700;
+        }
+
+        .empty-list p {
+            font-size: 16px;
         }
 
         /* Modal */
@@ -664,24 +715,24 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(0, 0, 0, 0.9);
+            background: rgba(0, 0, 0, 0.95);
             z-index: 1000;
             justify-content: center;
             align-items: center;
             padding: 20px;
-            backdrop-filter: blur(5px);
+            backdrop-filter: blur(8px);
         }
 
         .modal-content {
             background: linear-gradient(135deg, #0d1538 0%, #1a237e 100%);
-            border-radius: 15px;
+            border-radius: 18px;
             max-width: 900px;
             width: 100%;
-            max-height: 90vh;
+            max-height: 92vh;
             overflow-y: auto;
             position: relative;
-            border: 2px solid var(--secondary);
-            box-shadow: 0 0 50px rgba(255, 61, 0, 0.5);
+            border: 3px solid var(--secondary);
+            box-shadow: 0 0 60px rgba(255, 61, 0, 0.6);
         }
 
         .modal-header {
@@ -690,27 +741,31 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            border-radius: 13px 13px 0 0;
+            border-radius: 15px 15px 0 0;
         }
 
         .modal-title {
-            font-size: 24px;
-            font-weight: 700;
+            font-size: 28px;
+            font-weight: 800;
             color: white;
             display: flex;
             align-items: center;
-            gap: 10px;
+            gap: 12px;
+        }
+
+        .modal-title i {
+            font-size: 26px;
         }
 
         .modal-close {
-            background: none;
-            border: none;
+            background: rgba(255, 255, 255, 0.1);
+            border: 2px solid white;
             color: white;
-            font-size: 30px;
+            font-size: 32px;
             cursor: pointer;
-            transition: transform 0.3s;
-            width: 40px;
-            height: 40px;
+            transition: all 0.3s;
+            width: 42px;
+            height: 42px;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -719,49 +774,55 @@
 
         .modal-close:hover {
             transform: rotate(90deg);
-            background: rgba(255, 255, 255, 0.1);
+            background: rgba(255, 255, 255, 0.2);
+            box-shadow: 0 0 15px rgba(255, 255, 255, 0.3);
         }
 
         .modal-body {
-            padding: 30px;
+            padding: 25px;
         }
 
-        /* PDF Preview - ESPAÇAMENTO AJUSTADO PARA A4 */
+        /* PDF Preview - OTIMIZADO PARA A4 */
         .pdf-preview-container {
+            width: 210mm;
+            min-height: 297mm;
+            margin: 0 auto;
             background: white;
-            border-radius: 10px;
+            border-radius: 12px;
             overflow: hidden;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.3);
+            font-size: 14px;
+            line-height: 1.5;
+            padding: 0;
         }
 
         .pdf-header {
             background: linear-gradient(90deg, var(--primary), var(--dark));
-            padding: 15px 25px;
+            padding: 10mm 18mm;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            border-bottom: 3px solid var(--secondary);
-            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2);
+            border-bottom: 4px solid var(--secondary);
             min-height: 70px;
         }
 
         .pdf-logo {
-            width: 130px;
+            width: 140px;
             height: auto;
             max-height: 55px;
             object-fit: contain;
-            filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.3));
+            filter: drop-shadow(0 3px 6px rgba(0, 0, 0, 0.4));
         }
 
         .pdf-main-title {
             color: white;
-            font-size: 26px;
+            font-size: 28px;
             font-weight: 900;
             text-align: right;
             text-transform: uppercase;
-            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+            text-shadow: 0 3px 6px rgba(0, 0, 0, 0.4);
             letter-spacing: 1px;
-            line-height: 1.2;
+            line-height: 1.1;
         }
 
         .pdf-subtitle {
@@ -770,62 +831,64 @@
             font-weight: 700;
             margin-top: 3px;
             display: block;
-            text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
         }
 
         .pdf-section {
-            padding: 20px 25px;
+            padding: 12mm 18mm;
+            margin: 0;
         }
 
         .pdf-section-title {
             color: var(--primary);
-            font-size: 20px;
-            font-weight: 800;
-            margin-bottom: 20px;
+            font-size: 22px;
+            font-weight: 900;
+            margin-bottom: 15px;
             padding-bottom: 10px;
-            border-bottom: 3px solid var(--secondary);
+            border-bottom: 4px solid var(--secondary);
             display: flex;
             align-items: center;
             gap: 10px;
             text-transform: uppercase;
-            letter-spacing: 0.5px;
+            letter-spacing: 1px;
         }
 
         .pdf-data-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 15px;
-            margin-bottom: 25px;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 10px 25px;
+            margin-bottom: 20px;
         }
 
         .pdf-data-item {
-            margin-bottom: 15px;
-            padding: 6px;
+            margin-bottom: 12px;
+            padding: 8px 10px;
             background: #f9f9f9;
-            border-radius: 5px;
-            border-left: 4px solid var(--accent);
+            border-radius: 8px;
+            border-left: 5px solid var(--accent);
+            min-height: 65px;
         }
 
         .pdf-data-label {
             color: var(--primary);
-            font-weight: 800;
+            font-weight: 900;
             font-size: 14px;
-            margin-bottom: 6px;
+            margin-bottom: 5px;
             text-transform: uppercase;
-            letter-spacing: 0.5px;
-            padding-left: 5px;
+            letter-spacing: 0.8px;
+            padding-left: 8px;
         }
 
         .pdf-data-value {
             font-size: 16px;
             padding: 8px 0;
-            border-bottom: 2px solid #e0e0e0;
+            border-bottom: 3px solid #e0e0e0;
             color: #222;
-            font-weight: 700;
+            font-weight: 800;
             background: linear-gradient(to right, #f9f9f9, #ffffff);
             padding-left: 10px;
             padding-right: 10px;
-            border-radius: 4px;
+            border-radius: 6px;
             margin-top: 3px;
         }
 
@@ -833,68 +896,77 @@
             color: var(--success);
             font-size: 18px;
             font-weight: 900;
-            text-shadow: 0 1px 2px rgba(0, 200, 83, 0.2);
+            text-shadow: 0 2px 4px rgba(0, 200, 83, 0.2);
             background: linear-gradient(to right, #f1f8e9, #ffffff);
-            border-left: 4px solid var(--success);
+            border-left: 5px solid var(--success);
             padding: 10px;
-            border-radius: 6px;
+            border-radius: 8px;
         }
 
         .pdf-observations {
             background: #f8f9fa;
-            padding: 18px;
-            border-radius: 8px;
-            margin-top: 25px;
-            border-left: 4px solid var(--secondary);
-            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.08);
-            border-top: 1px solid #e0e0e0;
-            border-right: 1px solid #e0e0e0;
-            border-bottom: 1px solid #e0e0e0;
+            padding: 15px;
+            border-radius: 10px;
+            margin-top: 20px;
+            border-left: 5px solid var(--secondary);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            border-top: 2px solid #e0e0e0;
+            border-right: 2px solid #e0e0e0;
+            border-bottom: 2px solid #e0e0e0;
+            min-height: 100px;
+            max-height: 150px;
+            overflow-y: auto;
         }
 
         .pdf-observations-title {
             color: var(--primary);
             font-size: 16px;
-            font-weight: 800;
-            margin-bottom: 12px;
+            font-weight: 900;
+            margin-bottom: 10px;
             display: flex;
             align-items: center;
             gap: 10px;
             text-transform: uppercase;
-            letter-spacing: 0.5px;
+            letter-spacing: 0.8px;
         }
 
         .pdf-observations-text {
             color: #222;
-            font-size: 14px;
+            font-size: 15px;
             line-height: 1.5;
-            font-weight: 500;
-            padding: 5px;
+            font-weight: 600;
+            padding: 6px;
         }
 
         .pdf-footer {
             background: linear-gradient(90deg, #f5f5f5, #e8e8e8);
-            padding: 20px;
+            padding: 15px;
             text-align: center;
-            border-top: 3px solid var(--secondary);
+            border-top: 4px solid var(--secondary);
             margin-top: 25px;
-            box-shadow: inset 0 3px 10px rgba(0, 0, 0, 0.05);
+            box-shadow: inset 0 4px 15px rgba(0, 0, 0, 0.08);
         }
 
         .pdf-footer-text {
             color: var(--primary);
             font-size: 16px;
-            font-weight: 800;
-            margin-bottom: 8px;
+            font-weight: 900;
+            margin-bottom: 5px;
             text-transform: uppercase;
-            letter-spacing: 0.5px;
+            letter-spacing: 1px;
         }
 
         .pdf-footer-subtext {
             color: #555;
-            font-size: 14px;
+            font-size: 13px;
             font-style: italic;
-            font-weight: 500;
+            font-weight: 600;
+        }
+
+        /* Controle de quebra de página */
+        .no-page-break {
+            page-break-inside: avoid;
+            break-inside: avoid;
         }
 
         /* Responsividade */
@@ -902,24 +974,24 @@
             .main-container {
                 flex-direction: column;
             }
-            
+
             .sidebar {
                 width: 100%;
                 border-right: none;
-                border-bottom: 2px solid var(--secondary);
+                border-bottom: 3px solid var(--secondary);
                 padding: 20px;
             }
-            
+
             .logo-container {
                 margin-bottom: 20px;
             }
-            
+
             .menu-buttons {
                 display: flex;
                 flex-wrap: wrap;
                 gap: 10px;
             }
-            
+
             .menu-btn {
                 flex: 1;
                 min-width: 200px;
@@ -927,55 +999,71 @@
         }
 
         @media (max-width: 768px) {
+            body {
+                font-size: 16px;
+            }
+
             .form-grid {
                 grid-template-columns: 1fr;
             }
-            
+
             .actions-container {
                 flex-direction: column;
             }
-            
+
             .action-btn {
                 min-width: 100%;
+                font-size: 18px;
+                padding: 18px 25px;
             }
-            
+
             .pdf-list {
                 grid-template-columns: 1fr;
             }
-            
+
             .content-header {
                 flex-direction: column;
                 align-items: flex-start;
                 gap: 15px;
             }
-            
+
+            .content-title {
+                font-size: 36px;
+            }
+
+            .content-subtitle {
+                font-size: 18px;
+            }
+
             .date-info {
                 text-align: left;
+                font-size: 16px;
             }
-            
+
             .pdf-header {
                 flex-direction: column;
                 text-align: center;
-                gap: 10px;
+                gap: 12px;
+                padding: 12mm;
             }
-            
+
             .pdf-logo {
                 width: 120px;
             }
-            
+
             .pdf-main-title {
                 text-align: center;
-                font-size: 22px;
+                font-size: 24px;
             }
-            
+
             .pdf-data-grid {
                 grid-template-columns: 1fr;
             }
-            
+
             .pdf-data-item {
-                margin-bottom: 15px;
+                margin-bottom: 12px;
             }
-            
+
             .ai-btn {
                 position: relative;
                 right: auto;
@@ -983,24 +1071,78 @@
                 margin-top: 10px;
                 width: 100%;
             }
-            
+
             .ai-status {
                 position: relative;
                 right: auto;
                 top: auto;
-                margin-top: 5px;
+                margin-top: 8px;
+            }
+
+            .pdf-preview-container {
+                width: 100%;
+                min-height: auto;
+                font-size: 13px;
+            }
+
+            .pdf-section {
+                padding: 18px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .sidebar {
+                padding: 15px;
+            }
+
+            .logo {
+                width: 180px;
+            }
+
+            .logo-text {
+                font-size: 28px;
+            }
+
+            .content-title {
+                font-size: 30px;
+            }
+
+            .card-title {
+                font-size: 24px;
+            }
+
+            .pdf-list-title {
+                font-size: 24px;
+            }
+
+            .modal-title {
+                font-size: 24px;
             }
         }
 
         /* Animações */
         @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
 
         @keyframes slideIn {
-            from { transform: translateX(-20px); opacity: 0; }
-            to { transform: translateX(0); opacity: 1; }
+            from {
+                transform: translateX(-20px);
+                opacity: 0;
+            }
+
+            to {
+                transform: translateX(0);
+                opacity: 1;
+            }
         }
 
         .fade-in {
@@ -1013,17 +1155,17 @@
 
         /* Barra de rolagem personalizada */
         ::-webkit-scrollbar {
-            width: 10px;
+            width: 12px;
         }
 
         ::-webkit-scrollbar-track {
             background: rgba(13, 21, 56, 0.5);
-            border-radius: 5px;
+            border-radius: 6px;
         }
 
         ::-webkit-scrollbar-thumb {
             background: linear-gradient(var(--secondary), var(--accent));
-            border-radius: 5px;
+            border-radius: 6px;
         }
 
         ::-webkit-scrollbar-thumb:hover {
@@ -1033,17 +1175,19 @@
         /* Utilitários */
         .text-highlight {
             color: var(--accent);
-            font-weight: 700;
+            font-weight: 800;
+            font-size: 18px;
         }
 
         .badge {
             background: var(--secondary);
             color: white;
-            padding: 3px 8px;
-            border-radius: 4px;
-            font-size: 12px;
-            font-weight: 700;
+            padding: 5px 10px;
+            border-radius: 5px;
+            font-size: 14px;
+            font-weight: 800;
             margin-left: 10px;
+            box-shadow: 0 2px 6px rgba(255, 61, 0, 0.3);
         }
 
         .loading {
@@ -1053,7 +1197,7 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(0, 0, 0, 0.8);
+            background: rgba(0, 0, 0, 0.9);
             z-index: 2000;
             justify-content: center;
             align-items: center;
@@ -1064,7 +1208,7 @@
         .loading-spinner {
             width: 60px;
             height: 60px;
-            border: 5px solid rgba(255, 61, 0, 0.3);
+            border: 6px solid rgba(255, 61, 0, 0.3);
             border-top-color: var(--secondary);
             border-radius: 50%;
             animation: spin 1s linear infinite;
@@ -1072,15 +1216,18 @@
 
         .loading-text {
             color: white;
-            font-size: 18px;
-            font-weight: 600;
+            font-size: 22px;
+            font-weight: 700;
         }
 
         @keyframes spin {
-            to { transform: rotate(360deg); }
+            to {
+                transform: rotate(360deg);
+            }
         }
     </style>
 </head>
+
 <body>
     <!-- Loading Overlay -->
     <div class="loading" id="loading">
@@ -1099,25 +1246,25 @@
             <div class="sidebar-title">
                 <i class="fas fa-bars"></i> Menu Principal
             </div>
-            
+
             <div class="menu-buttons">
                 <button class="menu-btn active" data-section="form-section">
                     <i class="fas fa-plus-circle"></i>
                     Nova Ficha
                     <span class="badge">NOVO</span>
                 </button>
-                
+
                 <button class="menu-btn" data-section="list-section">
                     <i class="fas fa-file-pdf"></i>
                     Fichas Salvas
                     <span class="pdf-counter" id="pdfCount">0</span>
                 </button>
-                
+
                 <button class="menu-btn" id="quickPreviewBtn">
                     <i class="fas fa-eye"></i>
                     Pré-visualizar
                 </button>
-                
+
                 <button class="menu-btn" id="quickDownloadBtn">
                     <i class="fas fa-download"></i>
                     Download Rápido
@@ -1127,16 +1274,20 @@
             <div class="sidebar-title" style="margin-top: 40px;">
                 <i class="fas fa-chart-bar"></i> Estatísticas
             </div>
-            
+
             <div class="stats">
-                <div style="margin-bottom: 15px; padding: 15px; background: rgba(255, 61, 0, 0.1); border-radius: 8px;">
-                    <div style="color: var(--accent); font-size: 14px; margin-bottom: 5px;">Total de Fichas</div>
-                    <div style="font-size: 24px; font-weight: 700; color: white;" id="totalFichas">0</div>
+                <div
+                    style="margin-bottom: 15px; padding: 15px; background: rgba(255, 61, 0, 0.1); border-radius: 10px; border: 2px solid rgba(255, 61, 0, 0.2);">
+                    <div style="color: var(--accent); font-size: 16px; margin-bottom: 6px; font-weight: 700;">Total de
+                        Fichas</div>
+                    <div style="font-size: 28px; font-weight: 900; color: white;" id="totalFichas">0</div>
                 </div>
-                
-                <div style="padding: 15px; background: rgba(255, 171, 0, 0.1); border-radius: 8px;">
-                    <div style="color: var(--accent); font-size: 14px; margin-bottom: 5px;">Última Ficha</div>
-                    <div style="font-size: 16px; font-weight: 600; color: white;" id="ultimaFicha">Nenhuma</div>
+
+                <div
+                    style="padding: 15px; background: rgba(255, 171, 0, 0.1); border-radius: 10px; border: 2px solid rgba(255, 171, 0, 0.2);">
+                    <div style="color: var(--accent); font-size: 16px; margin-bottom: 6px; font-weight: 700;">Última
+                        Ficha</div>
+                    <div style="font-size: 18px; font-weight: 700; color: white;" id="ultimaFicha">Nenhuma</div>
                 </div>
             </div>
         </div>
@@ -1160,7 +1311,7 @@
                         <i class="fas fa-motorcycle"></i>
                         <div class="card-title">DADOS DA MOTOCICLETA</div>
                     </div>
-                    
+
                     <div class="card-body">
                         <div class="form-grid">
                             <div class="form-group">
@@ -1169,49 +1320,49 @@
                                 </label>
                                 <input type="text" class="form-control" id="placa" placeholder="ABC-1D23" maxlength="8">
                             </div>
-                            
+
                             <div class="form-group">
                                 <label class="form-label">
                                     <i class="fas fa-brands fa-mdb"></i> Marca
                                 </label>
                                 <input type="text" class="form-control" id="marca" placeholder="Honda, Yamaha, etc.">
                             </div>
-                            
+
                             <div class="form-group">
                                 <label class="form-label">
                                     <i class="fas fa-cube"></i> Modelo
                                 </label>
                                 <input type="text" class="form-control" id="modelo" placeholder="CB 500X, MT-07, etc.">
                             </div>
-                            
+
                             <div class="form-group">
                                 <label class="form-label">
                                     <i class="fas fa-tachometer-alt"></i> Odômetro (Km)
                                 </label>
                                 <input type="text" class="form-control" id="odometro" placeholder="15.500 km">
                             </div>
-                            
+
                             <div class="form-group">
                                 <label class="form-label">
                                     <i class="fas fa-calendar-alt"></i> Ano
                                 </label>
                                 <input type="text" class="form-control" id="ano" placeholder="2023 ou 2023/2024">
                             </div>
-                            
+
                             <div class="form-group">
                                 <label class="form-label">
                                     <i class="fas fa-palette"></i> Cor
                                 </label>
                                 <input type="text" class="form-control" id="cor" placeholder="Vermelha, Preta, etc.">
                             </div>
-                            
+
                             <div class="form-group">
                                 <label class="form-label">
                                     <i class="fas fa-dollar-sign"></i> Valor de Venda
                                 </label>
                                 <input type="text" class="form-control" id="valor" placeholder="R$ 35.900,00">
                             </div>
-                            
+
                             <div class="form-group">
                                 <label class="form-label">
                                     <i class="fas fa-info-circle"></i> Status
@@ -1229,7 +1380,7 @@
                                 </div>
                                 <input type="hidden" id="status" value="Disponível">
                             </div>
-                            
+
                             <div class="form-group ai-btn-container" style="grid-column: span 2;">
                                 <label class="form-label">
                                     <i class="fas fa-sticky-note"></i> Observações
@@ -1238,10 +1389,12 @@
                                     </button>
                                     <span class="ai-status" id="aiStatus"></span>
                                 </label>
-                                <textarea class="form-control" id="observacao" placeholder="Digite ou clique em 'Gerar com IA' para preencher automaticamente..." rows="3"></textarea>
+                                <textarea class="form-control" id="observacao"
+                                    placeholder="Digite ou clique em 'Gerar com IA' para preencher automaticamente..."
+                                    rows="4"></textarea>
                             </div>
                         </div>
-                        
+
                         <div class="actions-container">
                             <button type="button" class="action-btn btn-primary" id="generatePreviewBtn">
                                 <i class="fas fa-eye"></i> Visualizar PDF
@@ -1275,11 +1428,11 @@
                             <i class="fas fa-trash"></i> Limpar Tudo
                         </button>
                     </div>
-                    
+
                     <div class="pdf-list" id="pdfList">
                         <!-- Lista de PDFs será gerada aqui -->
                     </div>
-                    
+
                     <div class="empty-list" id="emptyListMessage">
                         <i class="far fa-file-pdf"></i>
                         <h3>Nenhuma ficha técnica salva</h3>
@@ -1315,7 +1468,7 @@
                 this.aiTimeout = null;
                 this.init();
             }
-            
+
             init() {
                 this.setupEventListeners();
                 this.updateDate();
@@ -1324,18 +1477,18 @@
                 this.setupFormValidation();
                 this.updateLastUpdateTime();
                 this.setupAIAutoFill();
-                
+
                 // Atualizar hora a cada minuto
                 setInterval(() => this.updateLastUpdateTime(), 60000);
             }
-            
+
             setupEventListeners() {
                 // Navegação do menu
                 document.querySelectorAll('.menu-btn').forEach(btn => {
                     btn.addEventListener('click', (e) => {
                         document.querySelectorAll('.menu-btn').forEach(b => b.classList.remove('active'));
                         document.querySelectorAll('.content-section').forEach(s => s.classList.remove('active'));
-                        
+
                         e.currentTarget.classList.add('active');
                         const sectionId = e.currentTarget.dataset.section;
                         if (sectionId) {
@@ -1343,7 +1496,7 @@
                         }
                     });
                 });
-                
+
                 // Botões de ação
                 document.getElementById('generatePreviewBtn').addEventListener('click', () => this.previewPDF());
                 document.getElementById('generateDownloadBtn').addEventListener('click', () => this.generateAndSavePDF());
@@ -1351,7 +1504,7 @@
                 document.getElementById('quickDownloadBtn').addEventListener('click', () => this.generateAndSavePDF());
                 document.getElementById('clearAllBtn').addEventListener('click', () => this.clearAllFichas());
                 document.getElementById('aiGenerateBtn').addEventListener('click', () => this.generateObservationsAI());
-                
+
                 // Status options
                 document.querySelectorAll('.status-option').forEach(option => {
                     option.addEventListener('click', () => {
@@ -1360,53 +1513,53 @@
                         document.getElementById('status').value = option.dataset.status;
                     });
                 });
-                
+
                 // Modal
                 document.getElementById('closePreviewModal').addEventListener('click', () => {
                     document.getElementById('previewModal').style.display = 'none';
                 });
-                
+
                 document.getElementById('previewModal').addEventListener('click', (e) => {
                     if (e.target === document.getElementById('previewModal')) {
                         document.getElementById('previewModal').style.display = 'none';
                     }
                 });
-                
+
                 // Formatação de campos
                 document.getElementById('placa').addEventListener('input', this.formatPlaca);
                 document.getElementById('valor').addEventListener('input', this.formatCurrency);
                 document.getElementById('odometro').addEventListener('input', this.formatOdometro);
             }
-            
+
             setupAIAutoFill() {
                 const modeloInput = document.getElementById('modelo');
                 const marcaInput = document.getElementById('marca');
-                
+
                 // Ativação automática ao digitar modelo
                 modeloInput.addEventListener('input', () => {
                     clearTimeout(this.aiTimeout);
-                    
+
                     const modelo = modeloInput.value.trim().toLowerCase();
                     const marca = marcaInput.value.trim().toLowerCase();
-                    
+
                     if (modelo.length > 2 && marca.length > 0) {
                         this.showAIStatus('Analisando modelo...');
                         this.aiTimeout = setTimeout(() => this.generateObservationsAI(), 1500);
                     }
                 });
-                
+
                 // Ativação automática ao selecionar marca
                 marcaInput.addEventListener('change', () => {
                     const modelo = modeloInput.value.trim().toLowerCase();
                     const marca = marcaInput.value.trim().toLowerCase();
-                    
+
                     if (modelo.length > 2 && marca.length > 0) {
                         this.showAIStatus('Analisando modelo...');
                         this.aiTimeout = setTimeout(() => this.generateObservationsAI(), 1000);
                     }
                 });
             }
-            
+
             formatPlaca(e) {
                 let value = e.target.value.toUpperCase().replace(/[^A-Z0-9]/g, '');
                 if (value.length > 3) {
@@ -1414,15 +1567,15 @@
                 }
                 e.target.value = value;
             }
-            
+
             formatCurrency(e) {
                 let value = e.target.value.replace(/\D/g, '');
-                
+
                 if (value.length === 0) {
                     e.target.value = '';
                     return;
                 }
-                
+
                 // Converte para número e formata
                 const number = parseInt(value) / 100;
                 e.target.value = number.toLocaleString('pt-BR', {
@@ -1430,38 +1583,38 @@
                     currency: 'BRL'
                 });
             }
-            
+
             formatOdometro(e) {
                 let value = e.target.value.replace(/\D/g, '');
-                
+
                 if (value.length === 0) {
                     e.target.value = '';
                     return;
                 }
-                
+
                 // Formata como número com separador de milhar
                 const number = parseInt(value);
                 e.target.value = number.toLocaleString('pt-BR') + ' km';
             }
-            
+
             updateDate() {
                 const now = new Date();
-                const options = { 
-                    day: '2-digit', 
-                    month: '2-digit', 
+                const options = {
+                    day: '2-digit',
+                    month: '2-digit',
                     year: 'numeric',
                     weekday: 'long'
                 };
-                document.getElementById('currentDate').textContent = 
+                document.getElementById('currentDate').textContent =
                     now.toLocaleDateString('pt-BR', options);
             }
-            
+
             updateLastUpdateTime() {
                 const now = new Date();
-                document.getElementById('lastUpdate').textContent = 
-                    `Atualizado às ${now.toLocaleTimeString('pt-BR', {hour: '2-digit', minute:'2-digit'})}`;
+                document.getElementById('lastUpdate').textContent =
+                    `Atualizado às ${now.toLocaleTimeString('pt-BR', { hour: '2-digit', minute: '2-digit' })}`;
             }
-            
+
             getFormData() {
                 return {
                     placa: document.getElementById('placa').value.trim(),
@@ -1477,26 +1630,26 @@
                     id: Date.now().toString() + Math.random().toString(36).substr(2, 9)
                 };
             }
-            
+
             validateFormData(data) {
                 const errors = [];
-                
+
                 if (!data.placa) errors.push('Placa é obrigatória');
-                else if (!/^[A-Z]{3}-[0-9][A-Z0-9][0-9]{2}$/.test(data.placa)) 
+                else if (!/^[A-Z]{3}-[0-9][A-Z0-9][0-9]{2}$/.test(data.placa))
                     errors.push('Formato de placa inválido (ex: ABC-1D23)');
-                
+
                 if (!data.marca) errors.push('Marca é obrigatória');
                 if (!data.modelo) errors.push('Modelo é obrigatório');
                 if (!data.ano) errors.push('Ano é obrigatório');
                 else if (!/^\d{4}(\/\d{4})?$/.test(data.ano))
                     errors.push('Formato de ano inválido (use: 2023 ou 2023/2024)');
-                
+
                 if (!data.cor) errors.push('Cor é obrigatória');
                 if (!data.valor) errors.push('Valor é obrigatório');
-                
+
                 return errors;
             }
-            
+
             setupFormValidation() {
                 const formInputs = document.querySelectorAll('.form-control');
                 formInputs.forEach(input => {
@@ -1504,7 +1657,7 @@
                         const data = this.getFormData();
                         const errors = this.validateFormData(data);
                         const fieldName = input.id;
-                        
+
                         if (errors.some(err => err.toLowerCase().includes(fieldName))) {
                             input.style.borderColor = '#f44336';
                         } else {
@@ -1513,7 +1666,7 @@
                     });
                 });
             }
-            
+
             // Base de conhecimento IA para motos
             getMotorcycleAIKnowledge() {
                 return {
@@ -1525,7 +1678,7 @@
                         'cg 160': 'Popular urbana com motor 160cc confiável e econômico. Baixa manutenção e excelente custo-benefício. Ideal para trabalho e deslocamento diário.',
                         'xre 300': 'Trail aventureira com motor 291cc e suspensão generosa. Versátil para asfalto e trilhas leves. Consumo equilibrado e conforto em estradas.'
                     },
-                    
+
                     // Yamaha
                     'yamaha': {
                         'mt-07': 'Naked esportiva com motor CP2 de 689cc e torque linear. Design agressivo e diversão garantida ao pilotar. Excelente custo-benefício na categoria.',
@@ -1534,7 +1687,7 @@
                         'fazer 250': 'Sport touring com motor 250cc econômico e potente. Conforto para viagens e agilidade urbana. Excelente opção para quem busca versatilidade.',
                         'nmix': 'Scooter elétrica com design moderno e tecnologia avançada. Zero emissões e baixo custo de manutenção. Ideal para mobilidade urbana sustentável.'
                     },
-                    
+
                     // BMW
                     'bmw': {
                         'r 1250 gs': 'Topo de linha das aventureiras com motor Boxer de 1254cc. Tecnologia avançada como Dynamic ESA e Pro. Referência em viagens longas e off-road.',
@@ -1542,7 +1695,7 @@
                         'f 750 gs': 'Aventureira média com motor 853cc e eletrônica avançada. Versátil para cidade e estrada. Excelente introdução ao mundo adventure.',
                         'c 400 gt': 'Scooter premium com motor 350cc e transmissão automática. Conforto e tecnologia para o dia a dia. Ideal para quem busca praticidade com conforto.'
                     },
-                    
+
                     // Harley Davidson
                     'harley davidson': {
                         'sportster': 'Ícone do estilo cruiser com motor V-Twin característico. Som marcante e customização infinita. Tradição e personalidade em duas rodas.',
@@ -1550,7 +1703,7 @@
                         'fat boy': 'Cruiser pesado com pneus largos e design robusto. Estilo inconfundível e presença de estrada. Para quem busca personalidade acima de tudo.',
                         'livewire': 'Elétrica premium com aceleração instantânea e tecnologia conectada. Silêncio e torque máximo desde as baixas rotações. O futuro da marca.'
                     },
-                    
+
                     // Ducati
                     'ducati': {
                         'monster': 'Ícone das nakeds com motor L-Twin e chassi treliçado. Design minimalista e performance emocionante. Combinação perfeita de estilo e esportividade.',
@@ -1558,7 +1711,7 @@
                         'multistrada': 'Aventureira premium com motor V-Twin e suspensão eletrônica. Versátil para todos os tipos de estrada. Elegância italiana em viagens de aventura.',
                         'scrambler': 'Retrô moderna com estilo cafe racer e tecnologia atual. Diversão garantida com posição relaxada. Para quem busca estilo sem abrir mão de performance.'
                     },
-                    
+
                     // Kawasaki
                     'kawasaki': {
                         'ninja 650': 'Esportiva de médio porte com motor bicilíndrico equilibrado. Posição menos radical e bom para uso misto. Ideal para quem busca esportividade com conforto.',
@@ -1566,7 +1719,7 @@
                         'versys 650': 'Aventureira versátil com motor 649cc e posição confortável. Ideal para viagens e uso urbano. Excelente custo-benefício no segmento.',
                         'ninja h2': 'Superesportiva com supercharger e 231cv. Performance extrema com tecnologia de ponta. Para os que buscam a experiência máxima de velocidade.'
                     },
-                    
+
                     // Suzuki
                     'suzuki': {
                         'gsx-r 750': 'Lenda das esportivas com equilíbrio perfeito entre cilindradas. Tradição e performance comprovadas. A moto que definiu o segmento esportivo.',
@@ -1574,7 +1727,7 @@
                         'hayabusa': 'Ícone da velocidade com aerodinâmica única e motor 1340cc. A moto mais rápida do mundo por muitos anos. Performance extrema com conforto surpreendente.',
                         'burgman 400': 'Maxi-scooter com motor 400cc e transmissão automática. Conforto premium e capacidade de bagagem. Ideal para viagens urbanas e intermunicipais.'
                     },
-                    
+
                     // Triumph
                     'triumph': {
                         'street triple': 'Naked britânica com motor 3 cilindros único. Agilidade urbana e performance emocionante. Design moderno com toque clássico inglês.',
@@ -1582,7 +1735,7 @@
                         'bonneville': 'Clássico moderno com estilo retrô e tecnologia atual. Tradição britânica com confiabilidade moderna. Para quem busca personalidade e estilo.',
                         'rocket 3': 'Cruiser com maior motor de produção em motocicletas (2458cc). Torque monumental e presença imponente. A fusão perfeita entre tradição e modernidade.'
                     },
-                    
+
                     // Padrões genéricos por tipo
                     'padroes': {
                         'adventure': 'Aventureira versátil para todos os tipos de terreno. Suspensão generosa e conforto para longas viagens. Ideal para quem busca liberdade na estrada.',
@@ -1594,27 +1747,27 @@
                     }
                 };
             }
-            
+
             generateObservationsAI() {
                 const modelo = document.getElementById('modelo').value.trim().toLowerCase();
                 const marca = document.getElementById('marca').value.trim().toLowerCase();
                 const aiBtn = document.getElementById('aiGenerateBtn');
-                
+
                 if (!modelo || !marca) {
                     this.showAIStatus('Digite marca e modelo', 'warning');
                     return;
                 }
-                
+
                 // Desabilitar botão durante processamento
                 aiBtn.disabled = true;
                 aiBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Gerando...';
                 this.showAIStatus('Consultando base de dados...');
-                
+
                 // Simular processamento
                 setTimeout(() => {
                     const knowledge = this.getMotorcycleAIKnowledge();
                     let observacao = '';
-                    
+
                     // Tentar encontrar correspondência exata
                     if (knowledge[marca] && knowledge[marca][modelo]) {
                         observacao = knowledge[marca][modelo];
@@ -1631,14 +1784,14 @@
                                 if (observacao) break;
                             }
                         }
-                        
+
                         // Se não encontrou, usar padrão baseado no tipo
                         if (!observacao) {
                             const tipoPadrao = this.detectarTipoMoto(modelo, marca);
                             observacao = knowledge.padroes[tipoPadrao] || knowledge.padroes['naked'];
                         }
                     }
-                    
+
                     // Adaptar ao status
                     const status = document.getElementById('status').value;
                     if (status === 'Vendido') {
@@ -1646,22 +1799,22 @@
                     } else if (status === 'Reservado') {
                         observacao += ' MOTOCICLETA RESERVADA - Aguardando documentação e finalização.';
                     }
-                    
+
                     // Preencher campo de observação
                     document.getElementById('observacao').value = observacao;
-                    
+
                     // Restaurar botão
                     aiBtn.disabled = false;
                     aiBtn.innerHTML = '<i class="fas fa-robot"></i> Gerar com IA';
                     this.showAIStatus('Observação gerada!', 'success');
-                    
+
                     setTimeout(() => {
                         document.getElementById('aiStatus').style.display = 'none';
                     }, 3000);
-                    
+
                 }, 1200);
             }
-            
+
             detectarTipoMoto(modelo, marca) {
                 const tipos = {
                     'adventure': ['gs', 'tiger', 'versys', 'v-strom', 'cb 500x', 'ténéré'],
@@ -1671,21 +1824,21 @@
                     'trail': ['xr', 'crf', 'wr', 'dr', 'klx', 'trip', 'xtz'],
                     'scooter': ['pcx', 'nmax', 'burgman', 'forza', 'x-max']
                 };
-                
+
                 for (const [tipo, palavras] of Object.entries(tipos)) {
                     if (palavras.some(palavra => modelo.includes(palavra) || marca.includes(palavra))) {
                         return tipo;
                     }
                 }
-                
+
                 return 'naked'; // Padrão
             }
-            
+
             showAIStatus(message, type = 'info') {
                 const statusEl = document.getElementById('aiStatus');
                 statusEl.textContent = message;
                 statusEl.style.display = 'inline-flex';
-                
+
                 if (type === 'success') {
                     statusEl.style.background = 'rgba(0, 200, 83, 0.2)';
                     statusEl.style.color = '#00c853';
@@ -1697,7 +1850,7 @@
                     statusEl.style.color = '#ffab00';
                 }
             }
-            
+
             generatePDFContent(data) {
                 const dataCriacao = new Date(data.dataCriacao);
                 const dataFormatada = dataCriacao.toLocaleDateString('pt-BR', {
@@ -1707,156 +1860,174 @@
                     hour: '2-digit',
                     minute: '2-digit'
                 });
-                
+
                 // Determinar cor do status
                 let statusColor = '#00c853'; // Disponível - verde
                 if (data.status === 'Vendido') statusColor = '#f44336'; // Vendido - vermelho
                 if (data.status === 'Reservado') statusColor = '#ff9100'; // Reservado - laranja
-                
+
                 return `
-                    <div class="pdf-header">
-                        <img src="https://i.ibb.co/DD98rjsH/logo1.png" alt="Logo 2M Motos" class="pdf-logo">
-                        <div class="pdf-main-title">
+                    <div class="pdf-header no-page-break" style="padding: 10mm 18mm;">
+                        <img src="https://i.ibb.co/DD98rjsH/logo1.png" alt="Logo 2M Motos" class="pdf-logo" style="width: 140px;">
+                        <div class="pdf-main-title" style="font-size: 28px;">
                             FICHA TÉCNICA
-                            <span class="pdf-subtitle">Gerado em ${dataFormatada}</span>
+                            <span class="pdf-subtitle" style="font-size: 14px;">Gerado em ${dataFormatada}</span>
                         </div>
                     </div>
                     
-                    <div class="pdf-section">
-                        <div class="pdf-section-title">
+                    <div class="pdf-section no-page-break" style="padding: 12mm 18mm;">
+                        <div class="pdf-section-title" style="font-size: 22px; margin-bottom: 15px;">
                             <i class="fas fa-motorcycle"></i> DADOS DA MOTOCICLETA
                         </div>
                         
-                        <div class="pdf-data-grid">
-                            <div class="pdf-data-item">
-                                <div class="pdf-data-label">Placa</div>
-                                <div class="pdf-data-value">${data.placa || '[NÃO INFORMADO]'}</div>
+                        <div class="pdf-data-grid" style="grid-template-columns: repeat(2, 1fr); gap: 10px 25px; margin-bottom: 20px;">
+                            <div class="pdf-data-item" style="min-height: 65px;">
+                                <div class="pdf-data-label" style="font-size: 14px;">Placa</div>
+                                <div class="pdf-data-value" style="font-size: 16px;">${data.placa || '[NÃO INFORMADO]'}</div>
                             </div>
                             
-                            <div class="pdf-data-item">
-                                <div class="pdf-data-label">Marca</div>
-                                <div class="pdf-data-value">${data.marca || '[NÃO INFORMADO]'}</div>
+                            <div class="pdf-data-item" style="min-height: 65px;">
+                                <div class="pdf-data-label" style="font-size: 14px;">Marca</div>
+                                <div class="pdf-data-value" style="font-size: 16px;">${data.marca || '[NÃO INFORMADO]'}</div>
                             </div>
                             
-                            <div class="pdf-data-item">
-                                <div class="pdf-data-label">Modelo</div>
-                                <div class="pdf-data-value">${data.modelo || '[NÃO INFORMADO]'}</div>
+                            <div class="pdf-data-item" style="min-height: 65px;">
+                                <div class="pdf-data-label" style="font-size: 14px;">Modelo</div>
+                                <div class="pdf-data-value" style="font-size: 16px;">${data.modelo || '[NÃO INFORMADO]'}</div>
                             </div>
                             
-                            <div class="pdf-data-item">
-                                <div class="pdf-data-label">Ano</div>
-                                <div class="pdf-data-value">${data.ano || '[NÃO INFORMADO]'}</div>
+                            <div class="pdf-data-item" style="min-height: 65px;">
+                                <div class="pdf-data-label" style="font-size: 14px;">Ano</div>
+                                <div class="pdf-data-value" style="font-size: 16px;">${data.ano || '[NÃO INFORMADO]'}</div>
                             </div>
                             
-                            <div class="pdf-data-item">
-                                <div class="pdf-data-label">Cor</div>
-                                <div class="pdf-data-value">${data.cor || '[NÃO INFORMADO]'}</div>
+                            <div class="pdf-data-item" style="min-height: 65px;">
+                                <div class="pdf-data-label" style="font-size: 14px;">Cor</div>
+                                <div class="pdf-data-value" style="font-size: 16px;">${data.cor || '[NÃO INFORMADO]'}</div>
                             </div>
                             
-                            <div class="pdf-data-item">
-                                <div class="pdf-data-label">Odômetro (Km)</div>
-                                <div class="pdf-data-value">${data.odometro || '[NÃO INFORMADO]'}</div>
+                            <div class="pdf-data-item" style="min-height: 65px;">
+                                <div class="pdf-data-label" style="font-size: 14px;">Odômetro (Km)</div>
+                                <div class="pdf-data-value" style="font-size: 16px;">${data.odometro || '[NÃO INFORMADO]'}</div>
                             </div>
                             
-                            <div class="pdf-data-item">
-                                <div class="pdf-data-label">Status</div>
-                                <div class="pdf-data-value" style="color: ${statusColor}; font-weight: 900;">${data.status}</div>
+                            <div class="pdf-data-item" style="min-height: 65px;">
+                                <div class="pdf-data-label" style="font-size: 14px;">Status</div>
+                                <div class="pdf-data-value" style="font-size: 16px; color: ${statusColor}; font-weight: 900;">${data.status}</div>
                             </div>
                             
-                            <div class="pdf-data-item">
-                                <div class="pdf-data-label">Valor de Venda</div>
-                                <div class="pdf-data-value pdf-value-highlight">
+                            <div class="pdf-data-item" style="min-height: 65px;">
+                                <div class="pdf-data-label" style="font-size: 14px;">Valor de Venda</div>
+                                <div class="pdf-data-value pdf-value-highlight" style="font-size: 18px; padding: 10px;">
                                     ${data.valor || '[NÃO INFORMADO]'}
                                 </div>
                             </div>
                         </div>
                         
                         ${data.observacao ? `
-                        <div class="pdf-observations">
-                            <div class="pdf-observations-title">
+                        <div class="pdf-observations no-page-break" style="margin-top: 20px; padding: 15px; min-height: 100px;">
+                            <div class="pdf-observations-title" style="font-size: 16px;">
                                 <i class="fas fa-sticky-note"></i> OBSERVAÇÕES
                             </div>
-                            <p class="pdf-observations-text">${data.observacao}</p>
+                            <p class="pdf-observations-text" style="font-size: 15px;">${data.observacao}</p>
                         </div>
                         ` : ''}
                         
-                        <div class="pdf-footer">
-                            <div class="pdf-footer-text">Procure o Vendedor para mais informações e detalhes</div>
-                            <div class="pdf-footer-subtext">2M MOTOS - Performance e Qualidade em Duas Rodas</div>
+                        <div class="pdf-footer no-page-break" style="margin-top: 25px; padding: 15px;">
+                            <div class="pdf-footer-text" style="font-size: 16px;">Procure o Vendedor para mais informações e detalhes</div>
+                            <div class="pdf-footer-subtext" style="font-size: 13px;">2M MOTOS - Performance e Qualidade em Duas Rodas</div>
                         </div>
                     </div>
                 `;
             }
-            
+
+            createA4Element(content) {
+                const element = document.createElement('div');
+                element.innerHTML = content;
+
+                // Estilos fixos para A4 otimizado
+                element.style.width = '210mm';
+                element.style.minHeight = '297mm';
+                element.style.maxHeight = '297mm';
+                element.style.padding = '0';
+                element.style.margin = '0 auto';
+                element.style.boxSizing = 'border-box';
+                element.style.fontSize = '14px';
+                element.style.backgroundColor = '#FFFFFF';
+                element.style.position = 'relative';
+                element.style.lineHeight = '1.5';
+                element.style.overflow = 'hidden';
+
+                return element;
+            }
+
             showLoading() {
                 document.getElementById('loading').style.display = 'flex';
             }
-            
+
             hideLoading() {
                 document.getElementById('loading').style.display = 'none';
             }
-            
+
             previewPDF() {
                 const data = this.getFormData();
                 const errors = this.validateFormData(data);
-                
+
                 if (errors.length > 0) {
                     alert('Por favor, corrija os seguintes erros:\n\n' + errors.join('\n'));
                     return;
                 }
-                
+
                 const previewContent = this.generatePDFContent(data);
                 document.getElementById('pdfPreviewContent').innerHTML = previewContent;
                 document.getElementById('previewModal').style.display = 'flex';
             }
-            
+
             generateAndSavePDF() {
                 const data = this.getFormData();
                 const errors = this.validateFormData(data);
-                
+
                 if (errors.length > 0) {
                     alert('Por favor, corrija os seguintes erros:\n\n' + errors.join('\n'));
                     return;
                 }
-                
+
                 this.showLoading();
-                
+
                 // Salvar nos dados locais
                 this.savedFichas.unshift(data);
                 localStorage.setItem('2m_motos_fichas', JSON.stringify(this.savedFichas));
-                
-                // Gerar PDF com espaçamento otimizado para A4
-                const element = document.createElement('div');
-                element.innerHTML = this.generatePDFContent(data);
-                element.style.width = '210mm';
-                element.style.minHeight = '297mm';
-                element.style.padding = '12mm';
-                element.style.margin = '0';
-                element.style.boxSizing = 'border-box';
-                element.style.fontSize = '13px';
-                
+
+                // Criar elemento A4 otimizado
+                const element = this.createA4Element(this.generatePDFContent(data));
+
                 const options = {
-                    margin: 5,
-                    filename: `ficha-tecnica-${data.placa.replace(/\W/g, '')}.pdf`,
-                    image: { 
-                        type: 'jpeg', 
-                        quality: 0.95 
+                    margin: 8,
+                    filename: `ficha-tecnica-${data.placa.replace(/\W/g, '')}-${new Date().getTime()}.pdf`,
+                    image: {
+                        type: 'jpeg',
+                        quality: 0.98
                     },
-                    html2canvas: { 
+                    html2canvas: {
                         scale: 2,
                         useCORS: true,
                         logging: false,
                         width: 794,
-                        height: 1123
+                        height: 1123,
+                        backgroundColor: '#FFFFFF',
+                        letterRendering: true,
+                        scrollX: 0,
+                        scrollY: 0
                     },
-                    jsPDF: { 
-                        unit: 'mm', 
-                        format: 'a4', 
+                    jsPDF: {
+                        unit: 'mm',
+                        format: 'a4',
                         orientation: 'portrait',
-                        compress: true
+                        compress: true,
+                        hotfixes: ['px_scaling']
                     }
                 };
-                
+
                 setTimeout(() => {
                     html2pdf().set(options).from(element).save().then(() => {
                         this.hideLoading();
@@ -1864,23 +2035,26 @@
                         this.updateStats();
                         this.renderFichasList();
                         this.clearForm();
+                    }).catch(err => {
+                        this.hideLoading();
+                        alert('Erro ao gerar PDF: ' + err.message);
                     });
                 }, 1000);
             }
-            
+
             showSuccessMessage(message) {
                 const btn = document.getElementById('generateDownloadBtn');
                 const originalText = btn.innerHTML;
-                
+
                 btn.innerHTML = `<i class="fas fa-check"></i> ${message}`;
                 btn.style.background = 'linear-gradient(90deg, #00c853, #00e676)';
-                
+
                 setTimeout(() => {
                     btn.innerHTML = originalText;
                     btn.style.background = 'linear-gradient(90deg, var(--success), #00e676)';
                 }, 3000);
             }
-            
+
             clearForm() {
                 document.getElementById('placa').value = '';
                 document.getElementById('marca').value = '';
@@ -1891,36 +2065,36 @@
                 document.getElementById('valor').value = '';
                 document.getElementById('observacao').value = '';
                 document.getElementById('status').value = 'Disponível';
-                
+
                 // Resetar status visual
                 document.querySelectorAll('.status-option').forEach(opt => opt.classList.remove('active'));
                 document.querySelector('.status-disponivel').classList.add('active');
             }
-            
+
             renderFichasList() {
                 const pdfList = document.getElementById('pdfList');
                 const emptyListMessage = document.getElementById('emptyListMessage');
-                
+
                 if (this.savedFichas.length === 0) {
                     pdfList.innerHTML = '';
                     emptyListMessage.style.display = 'block';
                     document.getElementById('pdfCount').textContent = '0';
                     return;
                 }
-                
+
                 emptyListMessage.style.display = 'none';
                 document.getElementById('pdfCount').textContent = this.savedFichas.length;
-                
+
                 let html = '';
                 this.savedFichas.forEach((ficha, index) => {
                     const dataCriacao = new Date(ficha.dataCriacao);
                     const dataFormatada = dataCriacao.toLocaleDateString('pt-BR');
-                    
+
                     // Determinar cor do status
                     let statusClass = 'status-disponivel';
                     if (ficha.status === 'Vendido') statusClass = 'status-vendido';
                     if (ficha.status === 'Reservado') statusClass = 'status-reservado';
-                    
+
                     html += `
                         <div class="pdf-item slide-in">
                             <div class="pdf-item-header">
@@ -1945,7 +2119,7 @@
                                 </div>
                                 <div class="pdf-detail">
                                     <span class="detail-label">Status:</span>
-                                    <span class="detail-value"><span class="${statusClass}" style="font-size: 11px;">${ficha.status}</span></span>
+                                    <span class="detail-value"><span class="${statusClass}" style="font-size: 12px; padding: 3px 8px;">${ficha.status}</span></span>
                                 </div>
                                 <div class="pdf-detail">
                                     <span class="detail-label">Valor:</span>
@@ -1967,17 +2141,17 @@
                         </div>
                     `;
                 });
-                
+
                 pdfList.innerHTML = html;
             }
-            
+
             viewFicha(id) {
                 const ficha = this.savedFichas.find(f => f.id === id);
                 if (ficha) {
                     const previewContent = this.generatePDFContent(ficha);
                     document.getElementById('pdfPreviewContent').innerHTML = previewContent;
                     document.getElementById('previewModal').style.display = 'flex';
-                    
+
                     // Ir para seção do formulário
                     document.querySelectorAll('.menu-btn').forEach(b => b.classList.remove('active'));
                     document.querySelectorAll('.content-section').forEach(s => s.classList.remove('active'));
@@ -1985,51 +2159,52 @@
                     document.getElementById('form-section').classList.add('active');
                 }
             }
-            
+
             downloadFicha(id) {
                 this.showLoading();
                 const ficha = this.savedFichas.find(f => f.id === id);
-                
+
                 if (ficha) {
-                    const element = document.createElement('div');
-                    element.innerHTML = this.generatePDFContent(ficha);
-                    element.style.width = '210mm';
-                    element.style.minHeight = '297mm';
-                    element.style.padding = '12mm';
-                    element.style.margin = '0';
-                    element.style.boxSizing = 'border-box';
-                    element.style.fontSize = '13px';
-                    
+                    const element = this.createA4Element(this.generatePDFContent(ficha));
+
                     const options = {
-                        margin: 5,
+                        margin: 8,
                         filename: `ficha-tecnica-${ficha.placa.replace(/\W/g, '')}.pdf`,
-                        image: { 
-                            type: 'jpeg', 
-                            quality: 0.95 
+                        image: {
+                            type: 'jpeg',
+                            quality: 0.98
                         },
-                        html2canvas: { 
+                        html2canvas: {
                             scale: 2,
                             useCORS: true,
                             logging: false,
                             width: 794,
-                            height: 1123
+                            height: 1123,
+                            backgroundColor: '#FFFFFF',
+                            letterRendering: true,
+                            scrollX: 0,
+                            scrollY: 0
                         },
-                        jsPDF: { 
-                            unit: 'mm', 
-                            format: 'a4', 
+                        jsPDF: {
+                            unit: 'mm',
+                            format: 'a4',
                             orientation: 'portrait',
-                            compress: true
+                            compress: true,
+                            hotfixes: ['px_scaling']
                         }
                     };
-                    
+
                     setTimeout(() => {
                         html2pdf().set(options).from(element).save().then(() => {
                             this.hideLoading();
+                        }).catch(err => {
+                            this.hideLoading();
+                            alert('Erro ao baixar PDF: ' + err.message);
                         });
                     }, 1000);
                 }
             }
-            
+
             deleteFicha(id) {
                 if (confirm('Tem certeza que deseja excluir esta ficha técnica?')) {
                     this.savedFichas = this.savedFichas.filter(f => f.id !== id);
@@ -2038,13 +2213,13 @@
                     this.updateStats();
                 }
             }
-            
+
             clearAllFichas() {
                 if (this.savedFichas.length === 0) {
                     alert('Não há fichas para limpar!');
                     return;
                 }
-                
+
                 if (confirm('Tem certeza que deseja excluir TODAS as fichas técnicas?\nEsta ação não pode ser desfeita.')) {
                     this.savedFichas = [];
                     localStorage.removeItem('2m_motos_fichas');
@@ -2053,14 +2228,14 @@
                     alert('Todas as fichas técnicas foram excluídas!');
                 }
             }
-            
+
             updateStats() {
                 document.getElementById('totalFichas').textContent = this.savedFichas.length;
-                
+
                 if (this.savedFichas.length > 0) {
                     const ultima = this.savedFichas[0];
                     const data = new Date(ultima.dataCriacao);
-                    document.getElementById('ultimaFicha').textContent = 
+                    document.getElementById('ultimaFicha').textContent =
                         `${ultima.placa} - ${ultima.modelo} (${data.toLocaleDateString('pt-BR')})`;
                 } else {
                     document.getElementById('ultimaFicha').textContent = 'Nenhuma';
@@ -2104,13 +2279,13 @@
                         id: 'exemplo2'
                     }
                 ];
-                
+
                 sistema.savedFichas = exemplos;
                 localStorage.setItem('2m_motos_fichas', JSON.stringify(exemplos));
                 sistema.renderFichasList();
                 sistema.updateStats();
             }
-            
+
             // Preencher formulário com exemplo
             document.getElementById('placa').value = 'MOT-0R23';
             document.getElementById('marca').value = 'Ducati';
@@ -2119,7 +2294,7 @@
             document.getElementById('cor').value = 'Vermelha';
             document.getElementById('odometro').value = '5.800 km';
             document.getElementById('valor').value = 'R$ 129.900,00';
-            
+
             // Gerar automaticamente a observação com IA
             setTimeout(() => {
                 sistema.generateObservationsAI();
@@ -2127,4 +2302,5 @@
         });
     </script>
 </body>
+
 </html>
