@@ -16,6 +16,7 @@
             --light: #f5f5f7;
             --success: #00c853;
             --warning: #ff9100;
+            --info: #2196f3;
         }
 
         * {
@@ -499,6 +500,28 @@
             box-shadow: 0 15px 35px rgba(0, 200, 83, 0.7);
         }
 
+        .btn-info {
+            background: linear-gradient(90deg, var(--info), #42a5f5);
+            color: white;
+            box-shadow: 0 6px 25px rgba(33, 150, 243, 0.5);
+        }
+
+        .btn-info:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 35px rgba(33, 150, 243, 0.7);
+        }
+
+        .btn-warning {
+            background: linear-gradient(90deg, var(--warning), #ffb74d);
+            color: white;
+            box-shadow: 0 6px 25px rgba(255, 145, 0, 0.5);
+        }
+
+        .btn-warning:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 35px rgba(255, 145, 0, 0.7);
+        }
+
         /* Lista de PDFs */
         .pdf-list-container {
             background: rgba(13, 21, 56, 0.7);
@@ -648,6 +671,48 @@
             box-shadow: 0 3px 8px rgba(0, 0, 0, 0.2);
         }
 
+        /* Botões de ação compactos (apenas ícones) */
+        .pdf-action-btn.icon-only {
+            flex: 0 0 auto;
+            width: 44px;
+            height: 44px;
+            padding: 0;
+            border-radius: 50%;
+            position: relative;
+        }
+
+        .pdf-action-btn.icon-only i {
+            font-size: 18px;
+            margin: 0;
+        }
+
+        /* Tooltip para botões com apenas ícones */
+        .pdf-action-btn.icon-only::after {
+            content: attr(title);
+            position: absolute;
+            bottom: 100%;
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(0, 0, 0, 0.8);
+            color: white;
+            padding: 6px 10px;
+            border-radius: 6px;
+            font-size: 12px;
+            font-weight: 600;
+            white-space: nowrap;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s;
+            pointer-events: none;
+            z-index: 100;
+        }
+
+        .pdf-action-btn.icon-only:hover::after {
+            opacity: 1;
+            visibility: visible;
+            bottom: calc(100% + 8px);
+        }
+
         .pdf-view {
             background: rgba(255, 61, 0, 0.2);
             color: white;
@@ -670,6 +735,18 @@
             background: rgba(0, 200, 83, 0.4);
             transform: translateY(-3px);
             box-shadow: 0 6px 15px rgba(0, 200, 83, 0.4);
+        }
+
+        .pdf-edit {
+            background: rgba(33, 150, 243, 0.2);
+            color: white;
+            border: 2px solid var(--info);
+        }
+
+        .pdf-edit:hover {
+            background: rgba(33, 150, 243, 0.4);
+            transform: translateY(-3px);
+            box-shadow: 0 6px 15px rgba(33, 150, 243, 0.4);
         }
 
         .pdf-delete {
@@ -1118,6 +1195,17 @@
             .modal-title {
                 font-size: 24px;
             }
+
+            .pdf-item-actions {
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+
+            .pdf-action-btn.icon-only {
+                width: 40px;
+                height: 40px;
+                margin: 2px;
+            }
         }
 
         /* Animações */
@@ -1225,6 +1313,35 @@
                 transform: rotate(360deg);
             }
         }
+
+        /* Indicador de modo edição */
+        .edit-mode-indicator {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: linear-gradient(90deg, var(--info), #42a5f5);
+            color: white;
+            padding: 10px 20px;
+            border-radius: 8px;
+            font-weight: 700;
+            z-index: 100;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            box-shadow: 0 4px 15px rgba(33, 150, 243, 0.5);
+            display: none;
+        }
+
+        .save-changes-btn {
+            margin-left: 10px;
+            background: var(--success);
+            border: none;
+            padding: 5px 10px;
+            border-radius: 5px;
+            color: white;
+            font-weight: 700;
+            cursor: pointer;
+        }
     </style>
 </head>
 
@@ -1233,6 +1350,17 @@
     <div class="loading" id="loading">
         <div class="loading-spinner"></div>
         <div class="loading-text">Gerando PDF...</div>
+    </div>
+
+    <!-- Indicador de modo edição -->
+    <div class="edit-mode-indicator" id="editModeIndicator">
+        <i class="fas fa-edit"></i> Modo Edição
+        <button class="save-changes-btn" id="saveChangesBtn">
+            <i class="fas fa-save"></i> Salvar
+        </button>
+        <button class="save-changes-btn" style="background: var(--secondary);" id="cancelEditBtn">
+            <i class="fas fa-times"></i> Cancelar
+        </button>
     </div>
 
     <div class="main-container">
@@ -1298,8 +1426,9 @@
             <div class="content-section active" id="form-section">
                 <div class="content-header">
                     <div>
-                        <div class="content-title">NOVA FICHA TÉCNICA</div>
-                        <div class="content-subtitle">Preencha os dados da motocicleta para gerar a ficha técnica</div>
+                        <div class="content-title" id="formTitle">NOVA FICHA TÉCNICA</div>
+                        <div class="content-subtitle" id="formSubtitle">Preencha os dados da motocicleta para gerar a
+                            ficha técnica</div>
                     </div>
                     <div class="date-info">
                         <i class="fas fa-calendar-alt"></i> <span id="currentDate">--/--/----</span>
@@ -1395,12 +1524,21 @@
                             </div>
                         </div>
 
-                        <div class="actions-container">
+                        <div class="actions-container" id="mainActions">
                             <button type="button" class="action-btn btn-primary" id="generatePreviewBtn">
                                 <i class="fas fa-eye"></i> Visualizar PDF
                             </button>
                             <button type="button" class="action-btn btn-success" id="generateDownloadBtn">
                                 <i class="fas fa-download"></i> Gerar & Salvar PDF
+                            </button>
+                        </div>
+
+                        <div class="actions-container" id="editActions" style="display: none;">
+                            <button type="button" class="action-btn btn-info" id="updateFichaBtn">
+                                <i class="fas fa-save"></i> Atualizar Ficha
+                            </button>
+                            <button type="button" class="action-btn btn-warning" id="cancelEditBtnForm">
+                                <i class="fas fa-times"></i> Cancelar Edição
                             </button>
                         </div>
                     </div>
@@ -1466,6 +1604,8 @@
             constructor() {
                 this.savedFichas = JSON.parse(localStorage.getItem('2m_motos_fichas')) || [];
                 this.aiTimeout = null;
+                this.currentEditId = null;
+                this.originalData = null;
                 this.init();
             }
 
@@ -1504,6 +1644,12 @@
                 document.getElementById('quickDownloadBtn').addEventListener('click', () => this.generateAndSavePDF());
                 document.getElementById('clearAllBtn').addEventListener('click', () => this.clearAllFichas());
                 document.getElementById('aiGenerateBtn').addEventListener('click', () => this.generateObservationsAI());
+
+                // Botões de edição
+                document.getElementById('updateFichaBtn').addEventListener('click', () => this.updateFicha());
+                document.getElementById('cancelEditBtnForm').addEventListener('click', () => this.cancelEdit());
+                document.getElementById('saveChangesBtn').addEventListener('click', () => this.updateFicha());
+                document.getElementById('cancelEditBtn').addEventListener('click', () => this.cancelEdit());
 
                 // Status options
                 document.querySelectorAll('.status-option').forEach(option => {
@@ -1629,6 +1775,29 @@
                     dataCriacao: new Date().toISOString(),
                     id: Date.now().toString() + Math.random().toString(36).substr(2, 9)
                 };
+            }
+
+            setFormData(data) {
+                document.getElementById('placa').value = data.placa || '';
+                document.getElementById('marca').value = data.marca || '';
+                document.getElementById('modelo').value = data.modelo || '';
+                document.getElementById('ano').value = data.ano || '';
+                document.getElementById('cor').value = data.cor || '';
+                document.getElementById('odometro').value = data.odometro || '';
+                document.getElementById('valor').value = data.valor || '';
+                document.getElementById('observacao').value = data.observacao || '';
+
+                // Configurar status
+                const status = data.status || 'Disponível';
+                document.getElementById('status').value = status;
+
+                // Atualizar status visual
+                document.querySelectorAll('.status-option').forEach(opt => opt.classList.remove('active'));
+                document.querySelectorAll('.status-option').forEach(opt => {
+                    if (opt.dataset.status === status) {
+                        opt.classList.add('active');
+                    }
+                });
             }
 
             validateFormData(data) {
@@ -2034,7 +2203,10 @@
                         this.showSuccessMessage('Ficha técnica gerada e salva com sucesso!');
                         this.updateStats();
                         this.renderFichasList();
-                        this.clearForm();
+
+                        if (!this.currentEditId) {
+                            this.clearForm();
+                        }
                     }).catch(err => {
                         this.hideLoading();
                         alert('Erro ao gerar PDF: ' + err.message);
@@ -2069,6 +2241,21 @@
                 // Resetar status visual
                 document.querySelectorAll('.status-option').forEach(opt => opt.classList.remove('active'));
                 document.querySelector('.status-disponivel').classList.add('active');
+
+                // Resetar título do formulário
+                document.getElementById('formTitle').textContent = 'NOVA FICHA TÉCNICA';
+                document.getElementById('formSubtitle').textContent = 'Preencha os dados da motocicleta para gerar a ficha técnica';
+
+                // Mostrar botões principais e esconder botões de edição
+                document.getElementById('mainActions').style.display = 'flex';
+                document.getElementById('editActions').style.display = 'none';
+
+                // Esconder indicador de edição
+                document.getElementById('editModeIndicator').style.display = 'none';
+
+                // Limpar ID de edição atual
+                this.currentEditId = null;
+                this.originalData = null;
             }
 
             renderFichasList() {
@@ -2128,14 +2315,17 @@
                             </div>
                             
                             <div class="pdf-item-actions">
-                                <button class="pdf-action-btn pdf-view" onclick="sistema.viewFicha('${ficha.id}')">
-                                    <i class="fas fa-eye"></i> Ver
+                                <button class="pdf-action-btn pdf-view icon-only" title="Visualizar" onclick="sistema.viewFicha('${ficha.id}')">
+                                    <i class="fas fa-eye"></i>
                                 </button>
-                                <button class="pdf-action-btn pdf-download" onclick="sistema.downloadFicha('${ficha.id}')">
-                                    <i class="fas fa-download"></i> Baixar
+                                <button class="pdf-action-btn pdf-download icon-only" title="Baixar PDF" onclick="sistema.downloadFicha('${ficha.id}')">
+                                    <i class="fas fa-download"></i>
                                 </button>
-                                <button class="pdf-action-btn pdf-delete" onclick="sistema.deleteFicha('${ficha.id}')">
-                                    <i class="fas fa-trash"></i> Excluir
+                                <button class="pdf-action-btn pdf-edit icon-only" title="Editar Ficha" onclick="sistema.editFicha('${ficha.id}')">
+                                    <i class="fas fa-edit"></i>
+                                </button>
+                                <button class="pdf-action-btn pdf-delete icon-only" title="Excluir Ficha" onclick="sistema.deleteFicha('${ficha.id}')">
+                                    <i class="fas fa-trash"></i>
                                 </button>
                             </div>
                         </div>
@@ -2157,6 +2347,83 @@
                     document.querySelectorAll('.content-section').forEach(s => s.classList.remove('active'));
                     document.querySelector('.menu-btn[data-section="form-section"]').classList.add('active');
                     document.getElementById('form-section').classList.add('active');
+                }
+            }
+
+            editFicha(id) {
+                const ficha = this.savedFichas.find(f => f.id === id);
+                if (ficha) {
+                    // Salvar dados originais para possível cancelamento
+                    this.originalData = { ...ficha };
+                    this.currentEditId = id;
+
+                    // Preencher formulário com dados da ficha
+                    this.setFormData(ficha);
+
+                    // Atualizar título do formulário
+                    document.getElementById('formTitle').textContent = 'EDITAR FICHA TÉCNICA';
+                    document.getElementById('formSubtitle').textContent = `Editando ficha da placa: ${ficha.placa}`;
+
+                    // Mostrar botões de edição e esconder botões principais
+                    document.getElementById('mainActions').style.display = 'none';
+                    document.getElementById('editActions').style.display = 'flex';
+
+                    // Mostrar indicador de modo edição
+                    document.getElementById('editModeIndicator').style.display = 'flex';
+
+                    // Ir para seção do formulário
+                    document.querySelectorAll('.menu-btn').forEach(b => b.classList.remove('active'));
+                    document.querySelectorAll('.content-section').forEach(s => s.classList.remove('active'));
+                    document.querySelector('.menu-btn[data-section="form-section"]').classList.add('active');
+                    document.getElementById('form-section').classList.add('active');
+                }
+            }
+
+            updateFicha() {
+                const data = this.getFormData();
+                const errors = this.validateFormData(data);
+
+                if (errors.length > 0) {
+                    alert('Por favor, corrija os seguintes erros:\n\n' + errors.join('\n'));
+                    return;
+                }
+
+                if (!this.currentEditId) {
+                    alert('Erro: Não há ficha sendo editada.');
+                    return;
+                }
+
+                // Atualizar dados mantendo o mesmo ID e data de criação original
+                const index = this.savedFichas.findIndex(f => f.id === this.currentEditId);
+                if (index !== -1) {
+                    // Manter a data de criação original
+                    data.dataCriacao = this.savedFichas[index].dataCriacao;
+                    // Manter o mesmo ID
+                    data.id = this.currentEditId;
+                    // Atualizar a ficha
+                    this.savedFichas[index] = data;
+
+                    // Salvar no localStorage
+                    localStorage.setItem('2m_motos_fichas', JSON.stringify(this.savedFichas));
+
+                    // Atualizar interface
+                    this.renderFichasList();
+                    this.updateStats();
+
+                    // Mostrar mensagem de sucesso
+                    this.showSuccessMessage('Ficha atualizada com sucesso!');
+
+                    // Limpar formulário
+                    this.clearForm();
+                }
+            }
+
+            cancelEdit() {
+                if (this.originalData && confirm('Tem certeza que deseja cancelar a edição? Todas as alterações serão perdidas.')) {
+                    // Restaurar dados originais se necessário
+                    this.clearForm();
+                } else if (!this.originalData) {
+                    this.clearForm();
                 }
             }
 
@@ -2211,6 +2478,11 @@
                     localStorage.setItem('2m_motos_fichas', JSON.stringify(this.savedFichas));
                     this.renderFichasList();
                     this.updateStats();
+
+                    // Se a ficha sendo editada foi excluída, cancelar edição
+                    if (this.currentEditId === id) {
+                        this.cancelEdit();
+                    }
                 }
             }
 
@@ -2225,6 +2497,12 @@
                     localStorage.removeItem('2m_motos_fichas');
                     this.renderFichasList();
                     this.updateStats();
+
+                    // Cancelar edição se estiver em modo de edição
+                    if (this.currentEditId) {
+                        this.cancelEdit();
+                    }
+
                     alert('Todas as fichas técnicas foram excluídas!');
                 }
             }
